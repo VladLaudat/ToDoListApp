@@ -11,4 +11,12 @@ public class TodoListDbContext : DbContext
     }
 
     public DbSet<TodoListEntity> TodoList { get; set; }
+
+    public DbSet<TaskEntity> Task { get; set; }
+
+    public DbSet<TagEntity> Tag { get; set; }
+
+    public DbSet<StatusEntity> Status { get; set; }
+
+    public DbSet<CommentEntity> Comment { get; set; }
 }
