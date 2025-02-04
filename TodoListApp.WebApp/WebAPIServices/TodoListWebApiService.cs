@@ -10,26 +10,22 @@ public class TodoListWebApiService : ITodoListWebApiService
 {
     private readonly ILogger<TodoListWebApiService> logger;
     private readonly HttpClient httpClient;
-    private readonly IConfiguration configuration;
+    private readonly ITodoListHelpers todoListHelpers;
 
-    public TodoListWebApiService(ILogger<TodoListWebApiService> logger, HttpClient httpClient, IConfiguration configuration)
+    public TodoListWebApiService(ILogger<TodoListWebApiService> logger, HttpClient httpClient, ITodoListHelpers todoListHelpers)
     {
         this.logger = logger;
         this.httpClient = httpClient;
-        this.configuration = configuration;
+        this.todoListHelpers = todoListHelpers;
+
     }
 
     public async Task<IList<TodoListListViewModel>> List(int page = 1)
     {
-        string baseURL = this.configuration["WebAPIURL:BaseURL"];
-        var uriBuilder = new UriBuilder(baseURL)
-        {
-            Path = $"{this.configuration["WebAPIURL:Endpoints:TodoList:Controller"]}/{this.configuration["WebAPIURL:Endpoints:TodoList:Get"]}",
-            Query = $"page={page}&pagesize={TodoListHelpers.TodoListListPageSize}",
-        };
+        var uri = this.todoListHelpers.TodoListGetEndpointUriGenerator(page);
 
-        var uri = uriBuilder.Uri;
         var response = await this.httpClient.GetAsync(uri);
+
         var model = JsonSerializer.Deserialize<List<TodoListListViewModel>>(await response.Content.ReadAsStringAsync());
 
         this.logger.RetrievedTodoLists();

@@ -1,4 +1,5 @@
 using TodoListApp.WebApp.WebAPIServices;
+using TodoListApp.WebApp.WebAPIServices.Helpers;
 using TodoListApp.WebApp.WebAPIServices.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<ITodoListWebApiService, TodoListWebApiService>();
+builder.Services.AddScoped<ITodoListHelpers, TodoListHelpers>();
 
 var app = builder.Build();
 
