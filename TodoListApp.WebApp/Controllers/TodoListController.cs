@@ -23,8 +23,8 @@ public class TodoListController : Controller
             return this.BadRequest(this.ModelState);
         }
 
-        this.logger.LogInformation("Request succesfully handled", this.ModelState.ValidationState);
         var model = await this.todoListWebApiService.List(page);
+        this.logger.LogInformation("Request succesfully handled", this.ModelState.ValidationState);
         return this.View(model);
     }
 

@@ -1,6 +1,6 @@
-namespace TodoListApp.WebApp.WebAPIServices;
+namespace TodoListApp.WebApp.WebAPIServices.Helpers;
 
-public static class Constants
+public static class TodoListHelpers
 {
     // {controller: TodoList}
 

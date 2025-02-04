@@ -1,6 +1,8 @@
 using System.Text.Json;
 using TodoListApp.WebApp.ViewModels;
+using TodoListApp.WebApp.WebAPIServices.Helpers;
 using TodoListApp.WebApp.WebAPIServices.Interfaces;
+using TodoListApp.WebApp.WebAPIServices.Logging;
 
 namespace TodoListApp.WebApp.WebAPIServices;
 
@@ -23,13 +25,14 @@ public class TodoListWebApiService : ITodoListWebApiService
         var uriBuilder = new UriBuilder(baseURL)
         {
             Path = $"{this.configuration["WebAPIURL:Endpoints:TodoList:Controller"]}/{this.configuration["WebAPIURL:Endpoints:TodoList:Get"]}",
-            Query = $"page={page}&pagesize={Constants.TodoListListPageSize}",
+            Query = $"page={page}&pagesize={TodoListHelpers.TodoListListPageSize}",
         };
 
         var uri = uriBuilder.Uri;
         var response = await this.httpClient.GetAsync(uri);
         var model = JsonSerializer.Deserialize<List<TodoListListViewModel>>(await response.Content.ReadAsStringAsync());
 
+        this.logger.RetrievedTodoLists();
         return model ?? new List<TodoListListViewModel>();
     }
 
