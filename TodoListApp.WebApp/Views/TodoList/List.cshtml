@@ -1,0 +1,10 @@
+@model IList<TodoListApp.WebApp.ViewModels.TodoListListViewModel>
+<ul>
+    @{
+        foreach (var todolist in Model)
+        {
+            <li>@todolist.Id</li>
+            <li>@todolist.Title</li>
+        }
+}
+</ul>

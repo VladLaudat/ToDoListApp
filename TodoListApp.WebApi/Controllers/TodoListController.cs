@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using Microsoft.AspNetCore.Mvc;
 using TodoListApp.WebApi.Models;
+using TodoListApp.WebApi.Services;
 using TodoListApp.WebApi.Services.Interfaces;
 
 namespace TodoListApp.WebApi.Controllers;
@@ -17,9 +18,11 @@ public class TodoListController : ControllerBase
         this.logger = logger;
     }
 
-    public IActionResult GetAll()
+    [HttpGet]
+    public IActionResult Get([FromQuery] int page = 1, [FromQuery] int pageSize = 4)
     {
-        throw new NotImplementedException();
+        var response = this.Ok(this.todoListDatabaseService.Read(page, pageSize));
+        return response;
     }
 
     public IActionResult Add(TodoListModel model)

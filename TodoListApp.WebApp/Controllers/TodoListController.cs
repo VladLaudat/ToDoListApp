@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using TodoListApp.WebApp.Models;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using TodoListApp.WebApp.ViewModels;
 using TodoListApp.WebApp.WebAPIServices.Interfaces;
 
 namespace TodoListApp.WebApp.Controllers;
@@ -14,22 +15,30 @@ public class TodoListController : Controller
         this.logger = logger;
     }
 
-    public IActionResult GetAll()
+    public async Task<IActionResult> List([FromQuery] int page = 1)
+    {
+        if (!this.ModelState.IsValid)
+        {
+            this.logger.LogInformation("Model is invalid: ", this.ModelState.ValidationState);
+            return this.BadRequest(this.ModelState);
+        }
+
+        this.logger.LogInformation("Request succesfully handled", this.ModelState.ValidationState);
+        var model = await this.todoListWebApiService.List(page);
+        return this.View(model);
+    }
+
+    public IActionResult Add(TodoListListViewModel todoListWebApiModel)
     {
         throw new NotImplementedException();
     }
 
-    public IActionResult Add(TodoListWebApiModel todoListWebApiModel)
+    public IActionResult Delete(TodoListListViewModel todoListWebApiModel)
     {
         throw new NotImplementedException();
     }
 
-    public IActionResult Delete(TodoListWebApiModel todoListWebApiModel)
-    {
-        throw new NotImplementedException();
-    }
-
-    public IActionResult Update(TodoListWebApiModel todoListWebApiModel)
+    public IActionResult Update(TodoListListViewModel todoListWebApiModel)
     {
         throw new NotImplementedException();
     }

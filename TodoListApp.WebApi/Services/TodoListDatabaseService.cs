@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using Microsoft.EntityFrameworkCore;
 using TodoListApp.WebApi.Models;
 using TodoListApp.WebApi.Repository;
 using TodoListApp.WebApi.Services.Interfaces;
@@ -16,6 +17,16 @@ public class TodoListDatabaseService : ITodoListDatabaseService
         this.logger = logger;
     }
 
+    public IList<TodoListModel> Read(int page = 1, int pageSize = 4)
+    {
+        return this.dbContext.TodoList.Skip((page - 1) * pageSize).Take(pageSize).Select(x => new TodoListModel()
+        {
+            Id = x.Id,
+            Title = x.Title,
+            Description = x.Description,
+        }).ToList();
+    }
+
     public void Add(TodoListModel model)
     {
         throw new NotImplementedException();
@@ -26,17 +37,8 @@ public class TodoListDatabaseService : ITodoListDatabaseService
         throw new NotImplementedException();
     }
 
-    public Collection<TodoListModel> GetAll()
-    {
-        throw new NotImplementedException();
-    }
 
     public void Update(TodoListModel model)
-    {
-        throw new NotImplementedException();
-    }
-
-    ICollection<TodoListModel> ITodoListDatabaseService.GetAll()
     {
         throw new NotImplementedException();
     }

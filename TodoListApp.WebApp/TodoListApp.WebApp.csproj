@@ -9,10 +9,6 @@
     <AnalysisLevel>latest</AnalysisLevel>
     <CodeAnalysisTreatWarningsAsErrors>false</CodeAnalysisTreatWarningsAsErrors>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\TodoListApp.WebApi\TodoListApp.WebApi.csproj" />
-  </ItemGroup>
   
   <ItemGroup>
     <AdditionalFiles Include="..\stylecop.json" Link="Properties\stylecop.json" />

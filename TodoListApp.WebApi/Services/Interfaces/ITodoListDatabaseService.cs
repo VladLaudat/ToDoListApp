@@ -5,7 +5,7 @@ namespace TodoListApp.WebApi.Services.Interfaces;
 
 public interface ITodoListDatabaseService
 {
-    public ICollection<TodoListModel> GetAll();
+    public IList<TodoListModel> Read(int page = 1, int pageSize = 4);
 
     public void Add(TodoListModel model);
 
