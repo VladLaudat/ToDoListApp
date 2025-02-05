@@ -5,7 +5,7 @@ public class TodoListHelpers : ITodoListHelpers
     /// <summary>
     /// Constant for page sizing when calling WEB API.
     /// </summary>
-    private const int TodoListListPageSize = 10;
+    private const int TodoListListPageSize = 9;
 
     private readonly IConfiguration configuration;
 
