@@ -64,16 +64,11 @@ public class TodoListDatabaseService : ITodoListDatabaseService
         this.logger.AddedTodoList();
     }
 
-    public void Delete(TodoListModel model)
+    public void Delete(int id)
     {
-        ArgumentNullException.ThrowIfNull(model);
+        var model = this.dbContext.TodoList.First(x => x.Id == id);
 
-        _ = this.dbContext.Remove(new TodoListEntity()
-        {
-            Id = model.Id,
-            Title = model.Title,
-            Description = model.Description,
-        });
+        _ = this.dbContext.Remove(model);
 
         _ = this.dbContext.SaveChanges();
 

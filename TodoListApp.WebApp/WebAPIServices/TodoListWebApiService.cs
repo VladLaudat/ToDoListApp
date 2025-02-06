@@ -53,9 +53,16 @@ public class TodoListWebApiService : ITodoListWebApiService
         throw new NotImplementedException();
     }
 
-    public Task Delete(int id)
+    public async Task Delete(int id)
     {
-        throw new NotImplementedException();
+        var uri = this.todoListHelpers.TodoListDeleteEndpointUriGenerator(id);
+
+        var response = await this.httpClient.DeleteAsync(uri);
+
+        if (response.EnsureSuccessStatusCode().StatusCode == HttpStatusCode.OK)
+        {
+            this.logger.DeletedTodoListSuccessfully();
+        }
     }
 
     public async Task Update(TodoListListViewModel todoListWebApiModel)
@@ -66,7 +73,7 @@ public class TodoListWebApiService : ITodoListWebApiService
 
         var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-        var response = await this.httpClient.PostAsync(uri, content);
+        var response = await this.httpClient.PutAsync(uri, content);
 
         if (response.EnsureSuccessStatusCode().StatusCode == HttpStatusCode.OK)
         {

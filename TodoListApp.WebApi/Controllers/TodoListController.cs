@@ -64,11 +64,27 @@ public class TodoListController : ControllerBase
         throw new NotImplementedException();
     }
 
-    public IActionResult Delete(TodoListModel model)
+    [HttpDelete]
+    [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(int), StatusCodes.Status500InternalServerError)]
+    public IActionResult Delete(int id)
     {
-        throw new NotImplementedException();
+        try
+        {
+            this.todoListDatabaseService.Delete(id);
+            this.logger.RequestSuccesfullyHandled();
+            return this.Ok();
+        }
+        catch (DbException ex)
+        {
+            this.logger.DbThrewException(ex);
+            return this.StatusCode(500);
+        }
     }
 
+    [HttpPut]
+    [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(int), StatusCodes.Status500InternalServerError)]
     public IActionResult Update(TodoListModel model)
     {
         try

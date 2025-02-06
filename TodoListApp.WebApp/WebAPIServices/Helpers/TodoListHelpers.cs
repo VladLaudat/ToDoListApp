@@ -55,6 +55,7 @@ public class TodoListHelpers : ITodoListHelpers
         var uriBuilder = new UriBuilder(baseURL)
         {
             Path = $"{this.configuration["WebAPIURL:Endpoints:TodoList:Controller"]}/{this.configuration["WebAPIURL:Endpoints:TodoList:Delete"]}",
+            Query= $"id={id}",
         };
 
         return uriBuilder.Uri;
