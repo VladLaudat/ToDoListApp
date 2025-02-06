@@ -7,6 +7,8 @@ public interface ITodoListDatabaseService
 {
     public IList<TodoListModel> Read(int page = 1, int pageSize = 4);
 
+    public TodoListModel ReadById(int id);
+
     public void Add(TodoListModel model);
 
     public void Update(TodoListModel model);

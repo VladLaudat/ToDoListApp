@@ -1,7 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using TodoListApp.WebApp.Controllers.Logging;
+using TodoListApp.WebApp.Models.RequestModels.TodoListControllerModels;
 using TodoListApp.WebApp.ViewModels;
 using TodoListApp.WebApp.WebAPIServices.Interfaces;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace TodoListApp.WebApp.Controllers;
 public class TodoListController : Controller
@@ -15,30 +18,64 @@ public class TodoListController : Controller
         this.logger = logger;
     }
 
-    public async Task<IActionResult> List([FromQuery] int page = 1)
+    public async Task<IActionResult> List(ListActionRequestModel model)
     {
-        if (!this.ModelState.IsValid)
+        if (!this.ModelState.IsValid || model == null)
         {
-            this.logger.LogInformation("Model is invalid: ", this.ModelState.ValidationState);
+            this.logger.InvalidModel();
             return this.BadRequest(this.ModelState);
         }
 
-        var model = await this.todoListWebApiService.List(page);
-        this.logger.LogInformation("Request succesfully handled", this.ModelState.ValidationState);
+        var viewmodel = await this.todoListWebApiService.List(model.Page);
+        this.logger.RequestSuccesfullyHandled();
+        return this.View(viewmodel);
+    }
+
+    public IActionResult Add()
+    {
+        return this.View();
+    }
+
+    public async Task<IActionResult> Edit([FromQuery] int id)
+    {
+        if (!this.ModelState.IsValid)
+        {
+            this.logger.InvalidModel();
+            return this.BadRequest(this.ModelState);
+        }
+
+        var model = await this.todoListWebApiService.GetById(id);
         return this.View(model);
     }
 
-    public IActionResult Add(TodoListListViewModel todoListWebApiModel)
+    public async Task<IActionResult> DeleteFromDb(int id)
     {
-        throw new NotImplementedException();
+        if (!this.ModelState.IsValid)
+        {
+            this.logger.InvalidModel();
+            return this.RedirectToAction("List");
+        }
+
+        await this.todoListWebApiService.Delete(id);
+        this.logger.RequestDeleteFromDb();
+        return this.RedirectToAction("List");
     }
 
-    public IActionResult Delete(TodoListListViewModel todoListWebApiModel)
+    public async Task<IActionResult> UpdateToDb(TodoListListViewModel todoListWebApiModel)
     {
-        throw new NotImplementedException();
+        if (!this.ModelState.IsValid || todoListWebApiModel == null)
+        {
+            this.logger.InvalidModel();
+            return this.RedirectToAction("List");
+        }
+
+        await this.todoListWebApiService.Update(todoListWebApiModel);
+        this.logger.RequestUpdateFromDb();
+        return this.RedirectToAction("List");
     }
 
-    public IActionResult Update(TodoListListViewModel todoListWebApiModel)
+    [NonAction]
+    public Task AddToDb(TodoListListViewModel todoListWebApiModel)
     {
         throw new NotImplementedException();
     }

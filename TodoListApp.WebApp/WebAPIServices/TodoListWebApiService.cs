@@ -1,4 +1,8 @@
+using System.Net;
+using System.Net.Http.Json;
+using System.Text;
 using System.Text.Json;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using TodoListApp.WebApp.ViewModels;
 using TodoListApp.WebApp.WebAPIServices.Helpers;
 using TodoListApp.WebApp.WebAPIServices.Interfaces;
@@ -32,18 +36,41 @@ public class TodoListWebApiService : ITodoListWebApiService
         return model ?? new List<TodoListListViewModel>();
     }
 
-    public void Add(TodoListListViewModel todoListWebApiModel)
+    public async Task<TodoListListViewModel> GetById(int id)
+    {
+        var uri = this.todoListHelpers.TodoListGetByIdEndpointUriGenerator(id);
+
+        var response = await this.httpClient.GetAsync(uri);
+
+        var model = JsonSerializer.Deserialize<TodoListListViewModel>(await response.Content.ReadAsStringAsync());
+
+        this.logger.RetrievedTodoLists();
+        return model ?? new TodoListListViewModel();
+    }
+
+    public Task Add(TodoListListViewModel todoListWebApiModel)
     {
         throw new NotImplementedException();
     }
 
-    public void Delete(TodoListListViewModel todoListWebApiModel)
+    public Task Delete(int id)
     {
         throw new NotImplementedException();
     }
 
-    public void Update(TodoListListViewModel todoListWebApiModel)
+    public async Task Update(TodoListListViewModel todoListWebApiModel)
     {
-        throw new NotImplementedException();
+        var uri = this.todoListHelpers.TodoListUpdateEndpointUriGenerator();
+
+        var json = JsonSerializer.Serialize(todoListWebApiModel);
+
+        var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+        var response = await this.httpClient.PostAsync(uri, content);
+
+        if (response.EnsureSuccessStatusCode().StatusCode == HttpStatusCode.OK)
+        {
+            this.logger.UpdatedTodoListSuccessfully();
+        }
     }
 }

@@ -6,9 +6,11 @@ public interface ITodoListWebApiService
 {
     public Task<IList<TodoListListViewModel>> List(int page = 1);
 
-    public void Add(TodoListListViewModel todoListWebApiModel);
+    public Task<TodoListListViewModel> GetById(int id);
 
-    public void Update(TodoListListViewModel todoListWebApiModel);
+    public Task Add(TodoListListViewModel todoListWebApiModel);
 
-    public void Delete(TodoListListViewModel todoListWebApiModel);
+    public Task Update(TodoListListViewModel todoListWebApiModel);
+
+    public Task Delete(int id);
 }

@@ -16,14 +16,14 @@
                 <div id="collapse-@i" class="accordion-collapse collapse" aria-labelledby="heading-@i" data-bs-parent="#TodoLists">
                     <div class="accordion-body">
                         <p class="small text-muted">@item.Description</p>
-                        <button type="button" class="btn btn-warning btn-sm">
+                        <a class="btn btn-warning btn-sm" asp-controller="TodoList" asp-action="Edit" asp-route-id ="@i">
                             <i class="bi bi-pencil"></i>
                         Edit
-                        </button>
-                        <button type="button" class="btn btn-danger btn-sm">
+                        </a>
+                        <a class="btn btn-danger btn-sm" asp-controller="TodoList" asp-action="DeleteFromDb" asp-route-id="@i">
                             <i class="bi bi-trash"></i>
                         Delete
-                        </button>
+                        </a>
                     </div>
                 </div>
                 

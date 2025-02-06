@@ -29,6 +29,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=TodoList}/{action=List}/{id?}");
+    pattern: "{controller=TodoList}/{action=List}/{page}",
+    defaults: new { page = 1 });
 
 app.Run();

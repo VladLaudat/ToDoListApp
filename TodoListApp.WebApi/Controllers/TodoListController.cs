@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using System.Data.Common;
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using TodoListApp.WebApi.Controllers.Logging;
 using TodoListApp.WebApi.Models;
 using TodoListApp.WebApi.Services;
@@ -40,6 +41,24 @@ public class TodoListController : ControllerBase
         }
     }
 
+    [HttpGet]
+    [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(int), StatusCodes.Status500InternalServerError)]
+    public IActionResult GetById([FromQuery] int id)
+    {
+        try
+        {
+            var response = this.Ok(this.todoListDatabaseService.ReadById(id));
+            this.logger.RequestSuccesfullyHandled();
+            return response;
+        }
+        catch (DbException ex)
+        {
+            this.logger.DbThrewException(ex);
+            return this.StatusCode(500);
+        }
+    }
+
     public IActionResult Add(TodoListModel model)
     {
         throw new NotImplementedException();
@@ -52,6 +71,16 @@ public class TodoListController : ControllerBase
 
     public IActionResult Update(TodoListModel model)
     {
-        throw new NotImplementedException();
+        try
+        {
+            this.todoListDatabaseService.Update(model);
+            this.logger.RequestSuccesfullyHandled();
+            return this.Ok();
+        }
+        catch (DbException ex)
+        {
+            this.logger.DbThrewException(ex);
+            return this.StatusCode(500);
+        }
     }
 }

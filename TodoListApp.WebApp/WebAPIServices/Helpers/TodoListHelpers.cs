@@ -14,6 +14,29 @@ public class TodoListHelpers : ITodoListHelpers
         this.configuration = configuration;
     }
 
+    public Uri TodoListUpdateEndpointUriGenerator()
+    {
+        string baseURL = this.configuration["WebAPIURL:BaseURL"];
+        var uriBuilder = new UriBuilder(baseURL)
+        {
+            Path = $"{this.configuration["WebAPIURL:Endpoints:TodoList:Controller"]}/{this.configuration["WebAPIURL:Endpoints:TodoList:Update"]}",
+        };
+
+        return uriBuilder.Uri;
+    }
+
+    public Uri TodoListGetByIdEndpointUriGenerator(int id)
+    {
+        string baseURL = this.configuration["WebAPIURL:BaseURL"];
+        var uriBuilder = new UriBuilder(baseURL)
+        {
+            Path = $"{this.configuration["WebAPIURL:Endpoints:TodoList:Controller"]}/{this.configuration["WebAPIURL:Endpoints:TodoList:GetById"]}",
+            Query = $"id={id}",
+        };
+
+        return uriBuilder.Uri;
+    }
+
     public Uri TodoListGetEndpointUriGenerator(int page)
     {
         string baseURL = this.configuration["WebAPIURL:BaseURL"];
@@ -21,6 +44,17 @@ public class TodoListHelpers : ITodoListHelpers
         {
             Path = $"{this.configuration["WebAPIURL:Endpoints:TodoList:Controller"]}/{this.configuration["WebAPIURL:Endpoints:TodoList:Get"]}",
             Query = $"page={page}&pagesize={TodoListListPageSize}",
+        };
+
+        return uriBuilder.Uri;
+    }
+
+    public Uri TodoListDeleteEndpointUriGenerator(int id)
+    {
+        string baseURL = this.configuration["WebAPIURL:BaseURL"];
+        var uriBuilder = new UriBuilder(baseURL)
+        {
+            Path = $"{this.configuration["WebAPIURL:Endpoints:TodoList:Controller"]}/{this.configuration["WebAPIURL:Endpoints:TodoList:Delete"]}",
         };
 
         return uriBuilder.Uri;
