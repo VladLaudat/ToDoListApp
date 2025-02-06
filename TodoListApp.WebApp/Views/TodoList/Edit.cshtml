@@ -1,6 +1,6 @@
-@model TodoListApp.WebApp.ViewModels.TodoListListViewModel
+@model TodoListApp.WebApp.ViewModels.TodoListViewModel
 
-<form asp-action="UpdateToDb">
+<form asp-controller="TodoList" asp-action="UpdateToDb">
     <input type="hidden" asp-for="Id" />
     <div class="form-group">
         <label asp-for="Title"></label>

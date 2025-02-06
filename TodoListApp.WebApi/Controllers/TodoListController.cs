@@ -59,9 +59,22 @@ public class TodoListController : ControllerBase
         }
     }
 
+    [HttpPost]
+    [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(int), StatusCodes.Status500InternalServerError)]
     public IActionResult Add(TodoListModel model)
     {
-        throw new NotImplementedException();
+        try
+        {
+            this.todoListDatabaseService.Add(model);
+            this.logger.RequestSuccesfullyHandled();
+            return this.Ok();
+        }
+        catch (DbException ex)
+        {
+            this.logger.DbThrewException(ex);
+            return this.StatusCode(500);
+        }
     }
 
     [HttpDelete]

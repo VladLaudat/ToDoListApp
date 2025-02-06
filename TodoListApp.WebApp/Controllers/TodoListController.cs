@@ -31,7 +31,7 @@ public class TodoListController : Controller
         return this.View(viewmodel);
     }
 
-    public async Task<IActionResult> AddToDb(TodoListListViewModel)
+    public async Task<IActionResult> Add()
     {
         return this.View();
     }
@@ -61,7 +61,7 @@ public class TodoListController : Controller
         return this.RedirectToAction("List");
     }
 
-    public async Task<IActionResult> UpdateToDb(TodoListListViewModel todoListWebApiModel)
+    public async Task<IActionResult> UpdateToDb(TodoListViewModel todoListWebApiModel)
     {
         if (!this.ModelState.IsValid || todoListWebApiModel == null)
         {
@@ -74,9 +74,16 @@ public class TodoListController : Controller
         return this.RedirectToAction("List");
     }
 
-    [NonAction]
-    public Task AddToDb(TodoListListViewModel todoListWebApiModel)
+    public async Task<IActionResult> AddToDb(TodoListViewModel todoListWebApiModel)
     {
-        throw new NotImplementedException();
+        if (!this.ModelState.IsValid || todoListWebApiModel == null)
+        {
+            this.logger.InvalidModel();
+            return this.RedirectToAction("List");
+        }
+
+        await this.todoListWebApiService.Add(todoListWebApiModel);
+        this.logger.RequestCreateToDb();
+        return this.RedirectToAction("List");
     }
 }

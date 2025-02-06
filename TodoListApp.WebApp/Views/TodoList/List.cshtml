@@ -1,4 +1,4 @@
-@model IList<TodoListApp.WebApp.ViewModels.TodoListListViewModel>
+@model IList<TodoListApp.WebApp.ViewModels.TodoListViewModel>
 
 <h4>To do lists</h4>
 <div class="accordion" id="TodoLists">
@@ -38,7 +38,7 @@
             <li class="page-item"><a class="page-link" href="#">3</a></li>
             <li class="page-item"><a class="page-link" href="#">Next</a></li>
         </ul>
-        <button type="button" class="btn btn-primary mb-2">Add</button>
+        <a class="btn btn-primary mb-2" asp-controller="TodoList" asp-action="Add">Add</a>
     </div>
         
     

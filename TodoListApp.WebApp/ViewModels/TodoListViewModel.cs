@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace TodoListApp.WebApp.ViewModels;
 
-public class TodoListListViewModel
+public class TodoListViewModel
 {
     [JsonPropertyName("id")]
     public int Id { get; set; }

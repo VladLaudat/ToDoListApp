@@ -1,6 +1,6 @@
-@model TodoListApp.WebApp.ViewModels.TodoListListViewModel
+@model TodoListApp.WebApp.ViewModels.TodoListViewModel
 
-<form asp-action="UpdateToDb">
+<form asp-controller="TodoList" asp-action="AddToDb">
     <div class="form-group">
         <label asp-for="Title"></label>
         <input asp-for="Title" class="form-control" />
@@ -11,5 +11,5 @@
         <input asp-for="Description" class="form-control" />
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
-    <button type="submit" class="btn btn-primary mt-2">Submit changes</button>
+    <button type="submit" class="btn btn-primary mt-2">Create</button>
 </form>

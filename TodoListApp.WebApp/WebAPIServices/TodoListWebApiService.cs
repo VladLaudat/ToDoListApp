@@ -24,33 +24,44 @@ public class TodoListWebApiService : ITodoListWebApiService
 
     }
 
-    public async Task<IList<TodoListListViewModel>> List(int page = 1)
+    public async Task<IList<TodoListViewModel>> List(int page = 1)
     {
         var uri = this.todoListHelpers.TodoListGetEndpointUriGenerator(page);
 
         var response = await this.httpClient.GetAsync(uri);
 
-        var model = JsonSerializer.Deserialize<List<TodoListListViewModel>>(await response.Content.ReadAsStringAsync());
+        var model = JsonSerializer.Deserialize<List<TodoListViewModel>>(await response.Content.ReadAsStringAsync());
 
         this.logger.RetrievedTodoLists();
-        return model ?? new List<TodoListListViewModel>();
+        return model ?? new List<TodoListViewModel>();
     }
 
-    public async Task<TodoListListViewModel> GetById(int id)
+    public async Task<TodoListViewModel> GetById(int id)
     {
         var uri = this.todoListHelpers.TodoListGetByIdEndpointUriGenerator(id);
 
         var response = await this.httpClient.GetAsync(uri);
 
-        var model = JsonSerializer.Deserialize<TodoListListViewModel>(await response.Content.ReadAsStringAsync());
+        var model = JsonSerializer.Deserialize<TodoListViewModel>(await response.Content.ReadAsStringAsync());
 
         this.logger.RetrievedTodoLists();
-        return model ?? new TodoListListViewModel();
+        return model ?? new TodoListViewModel();
     }
 
-    public Task Add(TodoListListViewModel todoListWebApiModel)
+    public async Task Add(TodoListViewModel todoListWebApiModel)
     {
-        throw new NotImplementedException();
+        var uri = this.todoListHelpers.TodoListAddEndpointUriGenerator();
+
+        var json = JsonSerializer.Serialize(todoListWebApiModel);
+
+        var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+        var response = await this.httpClient.PostAsync(uri, content);
+
+        if (response.EnsureSuccessStatusCode().StatusCode == HttpStatusCode.OK)
+        {
+            this.logger.AddedTodoListSuccessfully();
+        }
     }
 
     public async Task Delete(int id)
@@ -65,7 +76,7 @@ public class TodoListWebApiService : ITodoListWebApiService
         }
     }
 
-    public async Task Update(TodoListListViewModel todoListWebApiModel)
+    public async Task Update(TodoListViewModel todoListWebApiModel)
     {
         var uri = this.todoListHelpers.TodoListUpdateEndpointUriGenerator();
 

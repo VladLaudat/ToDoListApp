@@ -60,4 +60,15 @@ public class TodoListHelpers : ITodoListHelpers
 
         return uriBuilder.Uri;
     }
+
+    public Uri TodoListAddEndpointUriGenerator()
+    {
+        string baseURL = this.configuration["WebAPIURL:BaseURL"];
+        var uriBuilder = new UriBuilder(baseURL)
+        {
+            Path = $"{this.configuration["WebAPIURL:Endpoints:TodoList:Controller"]}/{this.configuration["WebAPIURL:Endpoints:TodoList:Add"]}",
+        };
+
+        return uriBuilder.Uri;
+    }
 }
