@@ -1,5 +1,6 @@
 namespace TodoListApp.WebApp.Controllers.Logging;
 
-public class TaskControllerLoggerExtensions
+public static class TaskControllerLoggerExtensions
 {
+
 }

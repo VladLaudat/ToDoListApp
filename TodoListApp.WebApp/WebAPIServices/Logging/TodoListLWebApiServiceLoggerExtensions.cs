@@ -4,7 +4,7 @@ public static class TodoListLWebApiServiceLoggerExtensions
 {
     private static readonly Action<ILogger, Exception?> TodoListsRetrieved = LoggerMessage.Define(
             LogLevel.Information,
-            new EventId(0, nameof(TodoListsRetrieved)),
+            new EventId(0, nameof(RetrievedTodoLists)),
             "Todo lists retrieved from API");
 
     private static readonly Action<ILogger, Exception?> TodoListRetrievedById = LoggerMessage.Define(
@@ -20,7 +20,7 @@ public static class TodoListLWebApiServiceLoggerExtensions
     private static readonly Action<ILogger, Exception?> AddSuccessful = LoggerMessage.Define(
             LogLevel.Information,
             new EventId(0, nameof(AddedTodoListSuccessfully)),
-            "Update to API was successful");
+            "Add to API was successful");
 
     private static readonly Action<ILogger, Exception?> DeleteSuccessful = LoggerMessage.Define(
             LogLevel.Information,
