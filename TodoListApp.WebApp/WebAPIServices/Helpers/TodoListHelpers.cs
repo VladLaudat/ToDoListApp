@@ -2,11 +2,6 @@ namespace TodoListApp.WebApp.WebAPIServices.Helpers;
 
 public class TodoListHelpers : ITodoListHelpers
 {
-    /// <summary>
-    /// Constant for page sizing when calling WEB API.
-    /// </summary>
-    private const int TodoListListPageSize = 9;
-
     private readonly IConfiguration configuration;
 
     public TodoListHelpers(IConfiguration configuration)
@@ -43,7 +38,7 @@ public class TodoListHelpers : ITodoListHelpers
         var uriBuilder = new UriBuilder(baseURL)
         {
             Path = $"{this.configuration["WebAPIURL:Endpoints:TodoList:Controller"]}/{this.configuration["WebAPIURL:Endpoints:TodoList:Get"]}",
-            Query = $"page={page}&pagesize={TodoListListPageSize}",
+            Query = $"page={page}&pagesize={this.configuration["Constants:TodoListListPageSize"]}",
         };
 
         return uriBuilder.Uri;
@@ -67,6 +62,17 @@ public class TodoListHelpers : ITodoListHelpers
         var uriBuilder = new UriBuilder(baseURL)
         {
             Path = $"{this.configuration["WebAPIURL:Endpoints:TodoList:Controller"]}/{this.configuration["WebAPIURL:Endpoints:TodoList:Add"]}",
+        };
+
+        return uriBuilder.Uri;
+    }
+
+    public Uri TodoListCountEndpointUriGenerator()
+    {
+        string baseURL = this.configuration["WebAPIURL:BaseURL"];
+        var uriBuilder = new UriBuilder(baseURL)
+        {
+            Path = $"{this.configuration["WebAPIURL:Endpoints:TodoList:Controller"]}/{this.configuration["WebAPIURL:Endpoints:TodoList:Count"]}",
         };
 
         return uriBuilder.Uri;

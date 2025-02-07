@@ -27,6 +27,11 @@ public static class TodoListLWebApiServiceLoggerExtensions
             new EventId(0, nameof(DeletedTodoListSuccessfully)),
             "Delete to API was successful");
 
+    private static readonly Action<ILogger, Exception?> CountSuccessful = LoggerMessage.Define(
+            LogLevel.Information,
+            new EventId(0, nameof(CountedTodoListSuccessfully)),
+            "Count from API was successful");
+
     public static void RetrievedTodoLists(this ILogger logger)
     {
         TodoListsRetrieved(logger, null);
@@ -50,5 +55,10 @@ public static class TodoListLWebApiServiceLoggerExtensions
     public static void AddedTodoListSuccessfully(this ILogger logger)
     {
         AddSuccessful(logger, null);
+    }
+
+    public static void CountedTodoListSuccessfully(this ILogger logger)
+    {
+        CountSuccessful(logger, null);
     }
 }

@@ -11,4 +11,6 @@ public interface ITodoListHelpers
     Uri TodoListGetEndpointUriGenerator(int page);
 
     Uri TodoListGetByIdEndpointUriGenerator(int id);
+
+    public Uri TodoListCountEndpointUriGenerator();
 }

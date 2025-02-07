@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using TodoListApp.WebApp.Controllers.Helpers;
 using TodoListApp.WebApp.Controllers.Logging;
 using TodoListApp.WebApp.Models.RequestModels.TodoListControllerModels;
 using TodoListApp.WebApp.ViewModels;
+using TodoListApp.WebApp.WebAPIServices.Helpers;
 using TodoListApp.WebApp.WebAPIServices.Interfaces;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
@@ -11,11 +13,13 @@ public class TodoListController : Controller
 {
     private readonly ITodoListWebApiService todoListWebApiService;
     private readonly ILogger<TodoListController> logger;
+    private readonly Helpers.ITodoListHelpers helpers;
 
-    public TodoListController(ITodoListWebApiService todoListWebApiService, ILogger<TodoListController> logger)
+    public TodoListController(ITodoListWebApiService todoListWebApiService, ILogger<TodoListController> logger, Helpers.ITodoListHelpers helpers)
     {
         this.todoListWebApiService = todoListWebApiService;
         this.logger = logger;
+        this.helpers = helpers;
     }
 
     public async Task<IActionResult> List(ListActionRequestModel model)
@@ -26,7 +30,13 @@ public class TodoListController : Controller
             return this.BadRequest(this.ModelState);
         }
 
-        var viewmodel = await this.todoListWebApiService.List(model.Page);
+        TodoListListViewModel viewmodel = new TodoListListViewModel
+        {
+            TodoLists = await this.todoListWebApiService.List(model.Page),
+            TotalPages = await this.helpers.TotalPages(),
+            CurrentPage = model.Page,
+        };
+
         this.logger.RequestSuccesfullyHandled();
         return this.View(viewmodel);
     }

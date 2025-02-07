@@ -91,4 +91,16 @@ public class TodoListWebApiService : ITodoListWebApiService
             this.logger.UpdatedTodoListSuccessfully();
         }
     }
+
+    public async Task<int> Count()
+    {
+        var uri = this.todoListHelpers.TodoListCountEndpointUriGenerator();
+
+        var response = await this.httpClient.GetAsync(uri);
+
+        var count = JsonSerializer.Deserialize<int>(await response.Content.ReadAsStringAsync());
+
+        this.logger.CountedTodoListSuccessfully();
+        return count;
+    }
 }

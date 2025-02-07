@@ -13,4 +13,6 @@ public interface ITodoListWebApiService
     public Task Update(TodoListViewModel todoListWebApiModel);
 
     public Task Delete(int id);
+
+    public Task<int> Count();
 }

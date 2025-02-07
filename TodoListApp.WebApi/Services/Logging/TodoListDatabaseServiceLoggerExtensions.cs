@@ -27,6 +27,11 @@ public static class TodoListDatabaseServiceLoggerExtensions
             new EventId(0, nameof(AddedTodoList)),
             "Todo list added to database");
 
+    private static readonly Action<ILogger, Exception?> TodoListCounted = LoggerMessage.Define(
+            LogLevel.Information,
+            new EventId(0, nameof(CountedTodoLists)),
+            "Retrieved number of records from TodoList");
+
     public static void RetrievedTodoLists(this ILogger logger)
     {
         TodoListsRetrieved(logger, null);
@@ -50,5 +55,10 @@ public static class TodoListDatabaseServiceLoggerExtensions
     public static void AddedTodoList(this ILogger logger)
     {
         TodoListAdded(logger, null);
+    }
+
+    public static void CountedTodoLists(this ILogger logger)
+    {
+        TodoListCounted(logger, null);
     }
 }

@@ -91,4 +91,13 @@ public class TodoListDatabaseService : ITodoListDatabaseService
 
         this.logger.EditedTodoList();
     }
+
+    public int Count()
+    {
+        var count = this.dbContext.TodoList.Count();
+
+        this.logger.CountedTodoLists();
+
+        return count;
+    }
 }

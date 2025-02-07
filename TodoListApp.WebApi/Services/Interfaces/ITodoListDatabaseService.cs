@@ -14,4 +14,6 @@ public interface ITodoListDatabaseService
     public void Update(TodoListModel model);
 
     public void Delete(int id);
+
+    public int Count();
 }

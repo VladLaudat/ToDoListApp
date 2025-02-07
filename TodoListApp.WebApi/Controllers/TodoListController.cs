@@ -112,4 +112,22 @@ public class TodoListController : ControllerBase
             return this.StatusCode(500);
         }
     }
+
+    [HttpGet]
+    [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(int), StatusCodes.Status500InternalServerError)]
+    public IActionResult Count()
+    {
+        try
+        {
+            var response = this.Ok(this.todoListDatabaseService.Count());
+            this.logger.RequestSuccesfullyHandled();
+            return response;
+        }
+        catch (DbException ex)
+        {
+            this.logger.DbThrewException(ex);
+            return this.StatusCode(500);
+        }
+    }
 }
