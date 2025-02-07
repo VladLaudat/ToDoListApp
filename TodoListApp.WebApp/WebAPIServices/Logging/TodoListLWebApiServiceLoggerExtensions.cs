@@ -47,14 +47,14 @@ public static class TodoListLWebApiServiceLoggerExtensions
         UpdateSuccessful(logger, null);
     }
 
-    public static void DeletedTodoListSuccessfully(this ILogger logger)
-    {
-        DeleteSuccessful(logger, null);
-    }
-
     public static void AddedTodoListSuccessfully(this ILogger logger)
     {
         AddSuccessful(logger, null);
+    }
+
+    public static void DeletedTodoListSuccessfully(this ILogger logger)
+    {
+        DeleteSuccessful(logger, null);
     }
 
     public static void CountedTodoListSuccessfully(this ILogger logger)
