@@ -4,7 +4,7 @@ public static class TodoListDatabaseServiceLoggerExtensions
 {
     private static readonly Action<ILogger, Exception?> TodoListsRetrieved = LoggerMessage.Define(
             LogLevel.Information,
-            new EventId(0, nameof(TodoListsRetrieved)),
+            new EventId(0, nameof(RetrievedTodoLists)),
             "Todo lists retrieved from database");
 
     private static readonly Action<ILogger, Exception?> TodoListRetrievedById = LoggerMessage.Define(

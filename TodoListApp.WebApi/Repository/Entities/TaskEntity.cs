@@ -17,22 +17,22 @@ public class TaskEntity
     public string Description { get; set; }
 
     [Column("created_date", TypeName = "date")]
-    public DateTime CreatedDate { get; set; }
+    public DateTime? CreatedDate { get; set; }
 
     [Column("due_date", TypeName = "date")]
-    public DateTime DueDate { get; set; }
+    public DateTime? DueDate { get; set; }
 
     [Column("task_status_id")]
     [ForeignKey(nameof(Status))]
-    public int StatusId { get; set; }
+    public int? StatusId { get; set; }
 
     [Column("todolist_id")]
     [ForeignKey(nameof(TodoList))]
-    public int TodoListId { get; set; }
+    public int? TodoListId { get; set; }
 
-    public StatusEntity Status { get; set; }
+    public StatusEntity? Status { get; set; }
 
-    public TodoListEntity TodoList { get; set; }
+    public TodoListEntity? TodoList { get; set; }
 
-    public IList<TagEntity> Tags { get; set; }
+    public IList<TagEntity>? Tags { get; set; }
 }

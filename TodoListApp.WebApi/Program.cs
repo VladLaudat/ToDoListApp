@@ -13,6 +13,7 @@ builder.Services.AddDbContext<TodoListDbContext>(options =>
     options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnection"]);
 });
 builder.Services.AddScoped<ITodoListDatabaseService, TodoListDatabaseService>();
+builder.Services.AddScoped<ITaskDatabaseService, TaskDatabaseService>();
 
 var app = builder.Build();
 

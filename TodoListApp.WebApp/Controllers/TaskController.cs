@@ -40,27 +40,58 @@ public class TaskController : Controller
 
     public async Task<IActionResult> Add()
     {
-        throw new NotImplementedException();
+        return this.View();
     }
 
-    public async Task<IActionResult> Edit()
+    public async Task<IActionResult> Edit([FromQuery] int id)
     {
-        throw new NotImplementedException();
+        if (!this.ModelState.IsValid)
+        {
+            this.logger.InvalidModel();
+            return this.BadRequest(this.ModelState);
+        }
+
+        var model = await this.taskWebApiService.GetById(id);
+        return this.View(model);
     }
 
-    public async Task<IActionResult> DeleteFromDb()
+    public async Task<IActionResult> DeleteFromDb(int id)
     {
-        throw new NotImplementedException();
+        if (!this.ModelState.IsValid)
+        {
+            this.logger.InvalidModel();
+            return this.RedirectToAction("List");
+        }
+
+        await this.taskWebApiService.Delete(id);
+        this.logger.RequestDeleteFromDb();
+        return this.RedirectToAction("List");
     }
 
-    public async Task<IActionResult> UpdateToDb()
+    public async Task<IActionResult> UpdateToDb(TaskViewModel taskWebApiModel)
     {
-        throw new NotImplementedException();
+        if (!this.ModelState.IsValid || taskWebApiModel == null)
+        {
+            this.logger.InvalidModel();
+            return this.RedirectToAction("List");
+        }
+
+        await this.taskWebApiService.Update(taskWebApiModel);
+        this.logger.RequestUpdateFromDb();
+        return this.RedirectToAction("List");
     }
 
-    public async Task<IActionResult> AddToDb()
+    public async Task<IActionResult> AddToDb(TaskViewModel taskWebApiModel)
     {
-        throw new NotImplementedException();
+        if (!this.ModelState.IsValid || taskWebApiModel == null)
+        {
+            this.logger.InvalidModel();
+            return this.RedirectToAction("List");
+        }
+
+        await this.taskWebApiService.Add(taskWebApiModel);
+        this.logger.RequestCreateToDb();
+        return this.RedirectToAction("List");
     }
 
 

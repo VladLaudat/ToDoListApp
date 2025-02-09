@@ -1,10 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using TodoListApp.WebApp.Controllers.Helpers;
 using TodoListApp.WebApp.Controllers.Logging;
 using TodoListApp.WebApp.Models.RequestModels.TodoListControllerModels;
 using TodoListApp.WebApp.ViewModels;
-using TodoListApp.WebApp.WebAPIServices.Helpers;
 using TodoListApp.WebApp.WebAPIServices.Interfaces;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
@@ -13,9 +11,9 @@ public class TodoListController : Controller
 {
     private readonly ITodoListWebApiService todoListWebApiService;
     private readonly ILogger<TodoListController> logger;
-    private readonly Helpers.ITodoListHelpers helpers;
+    private readonly ITodoListHelpers helpers;
 
-    public TodoListController(ITodoListWebApiService todoListWebApiService, ILogger<TodoListController> logger, Helpers.ITodoListHelpers helpers)
+    public TodoListController(ITodoListWebApiService todoListWebApiService, ILogger<TodoListController> logger, ITodoListHelpers helpers)
     {
         this.todoListWebApiService = todoListWebApiService;
         this.logger = logger;

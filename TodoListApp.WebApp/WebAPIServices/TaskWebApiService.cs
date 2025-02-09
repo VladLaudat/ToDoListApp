@@ -63,7 +63,7 @@ public class TaskWebApiService : ITaskWebApiService
 
     public async Task Delete(int id)
     {
-        var uri = this.taskHelpers.TaskGetByIdEndpointUriGenerator(id);
+        var uri = this.taskHelpers.TaskDeleteEndpointUriGenerator(id);
 
         var response = await this.httpClient.DeleteAsync(uri);
 
@@ -87,7 +87,7 @@ public class TaskWebApiService : ITaskWebApiService
 
     public async Task Update(TaskViewModel taskWebApiModel)
     {
-        var uri = this.taskHelpers.TaskAddEndpointUriGenerator();
+        var uri = this.taskHelpers.TaskUpdateEndpointUriGenerator();
 
         var json = JsonSerializer.Serialize(taskWebApiModel);
 
