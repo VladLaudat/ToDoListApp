@@ -1,10 +1,9 @@
 using System.Text.Json.Serialization;
 
-namespace TodoListApp.WebApp.ViewModels;
+namespace TodoListApp.WebApp.Models.JsonDeserializationModels;
 
-public class TaskViewModel
+public class TaskJsonModel
 {
-
     [JsonPropertyName("id")]
     public int Id { get; set; }
 

@@ -27,7 +27,7 @@ public class TaskDatabaseService : ITaskDatabaseService
             Id = model.Id,
             Title = model.Title,
             Description = model.Description,
-            CreatedDate = model.CreatedDate,
+            CreatedDate = DateTime.Now,
             DueDate = model.DueDate,
             Status = model.Status,
             Tags = model.Tags,
@@ -68,6 +68,8 @@ public class TaskDatabaseService : ITaskDatabaseService
                 Id = x.Id,
                 Title = x.Title,
                 Description = x.Description,
+                CreatedDate = x.CreatedDate,
+                DueDate = x.DueDate,
             }).ToList();
 
         this.logger.RetrievedTasks();

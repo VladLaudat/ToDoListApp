@@ -94,5 +94,16 @@ public class TaskController : Controller
         return this.RedirectToAction("List");
     }
 
+    public async Task<IActionResult> Details([FromQuery] int id)
+    {
+        if (!this.ModelState.IsValid)
+        {
+            this.logger.InvalidModel();
+            return this.RedirectToAction("List");
+        }
+
+        var model = await this.taskWebApiService.GetById(id);
+        return this.View(model);
+    }
 
 }
