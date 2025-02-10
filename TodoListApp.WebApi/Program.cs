@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using TodoListApp.WebApi.Repository;
+using TodoListApp.WebApi.Repository.Entities;
 using TodoListApp.WebApi.Services;
 using TodoListApp.WebApi.Services.Interfaces;
 
@@ -12,7 +13,7 @@ builder.Services.AddDbContext<TodoListDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnection"]);
 });
-builder.Services.AddScoped<ITodoListDatabaseService, TodoListDatabaseService>();
+builder.Services.AddScoped<IBaseDatabaseService<TodoListEntity>, TodoListDatabaseService>();
 builder.Services.AddScoped<ITaskDatabaseService, TaskDatabaseService>();
 
 var app = builder.Build();

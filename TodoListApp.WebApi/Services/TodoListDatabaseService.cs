@@ -8,18 +8,15 @@ using TodoListApp.WebApi.Services.Logging;
 
 namespace TodoListApp.WebApi.Services;
 
-public class TodoListDatabaseService : ITodoListDatabaseService
+public class TodoListDatabaseService : BaseDatabaseService<TodoListEntity, TodoListDatabaseService>
 {
-    private readonly ILogger<TodoListDatabaseService> logger;
-    private readonly TodoListDbContext dbContext;
-
     public TodoListDatabaseService(TodoListDbContext dbContext, ILogger<TodoListDatabaseService> logger)
+        : base(dbContext, logger)
     {
-        this.dbContext = dbContext;
-        this.logger = logger;
+
     }
 
-    public IList<TodoListModel> Read(int page = 1, int pageSize = 4)
+    /*public IList<TodoListModel> Read(int page = 1, int pageSize = 4)
     {
         var resource = this.dbContext.TodoList.Skip((page - 1) * pageSize)
             .Take(pageSize)
@@ -99,5 +96,5 @@ public class TodoListDatabaseService : ITodoListDatabaseService
         this.logger.CountedTodoLists();
 
         return count;
-    }
+    }*/
 }

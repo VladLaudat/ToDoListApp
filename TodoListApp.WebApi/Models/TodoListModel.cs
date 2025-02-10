@@ -1,12 +1,13 @@
-using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using TodoListApp.WebApi.Repository.Entities;
 
 namespace TodoListApp.WebApi.Models;
 
-public class TodoListModel
+public class TodoListModel : BaseModel
 {
-    public int Id { get; set; }
+    public string Title { get; set; } = string.Empty;
 
-    public string Title { get; set; }
+    public string Description { get; set; } = string.Empty;
 
-    public string Description { get; set; }
+    public IList<TaskEntity>? Task { get; }
 }

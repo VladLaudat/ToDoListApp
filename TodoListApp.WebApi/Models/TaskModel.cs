@@ -1,20 +1,21 @@
 using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
 using TodoListApp.WebApi.Repository.Entities;
 
 namespace TodoListApp.WebApi.Models;
 
-public class TaskModel
+public class TaskModel : BaseModel
 {
-    public int Id { get; set; }
+    public string Title { get; set; } = string.Empty;
 
-    public string Title { get; set; }
-
-    public string Description { get; set; }
+    public string Description { get; set; } = string.Empty;
 
     public DateTime CreatedDate { get; set; }
 
     public DateTime DueDate { get; set; }
+
+    public int StatusId { get; set; }
+
+    public int? TodoListId { get; set; }
 
     public StatusEntity? Status { get; set; }
 

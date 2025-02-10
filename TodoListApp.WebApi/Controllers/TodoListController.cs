@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using TodoListApp.WebApi.Controllers.Logging;
 using TodoListApp.WebApi.Models;
+using TodoListApp.WebApi.Repository.Entities;
 using TodoListApp.WebApi.Services;
 using TodoListApp.WebApi.Services.Interfaces;
 using TodoListApp.WebApi.Services.Logging;
@@ -15,9 +16,9 @@ namespace TodoListApp.WebApi.Controllers;
 public class TodoListController : ControllerBase
 {
     private readonly ILogger<TodoListController> logger;
-    private readonly ITodoListDatabaseService todoListDatabaseService;
+    private readonly IBaseDatabaseService<TodoListEntity> todoListDatabaseService;
 
-    public TodoListController(ITodoListDatabaseService todoListDatabaseService, ILogger<TodoListController> logger)
+    public TodoListController(IBaseDatabaseService<TodoListEntity> todoListDatabaseService, ILogger<TodoListController> logger)
     {
         this.todoListDatabaseService = todoListDatabaseService;
         this.logger = logger;
