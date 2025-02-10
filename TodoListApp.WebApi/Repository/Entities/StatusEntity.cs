@@ -4,14 +4,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace TodoListApp.WebApi.Repository.Entities;
 
 [Table("task_status")]
-public class StatusEntity
+public class StatusEntity : BaseEntity
 {
-    [Column("id")]
-    [Key]
-    public int Id { get; set; }
-
     [Column("description")]
-    public string Description { get; set; }
+    public string Description { get; set; } = string.Empty;
 
     [Column("is_active")]
     public bool IsActive { get; set; }

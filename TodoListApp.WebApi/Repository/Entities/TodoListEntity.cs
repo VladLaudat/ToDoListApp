@@ -4,15 +4,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace TodoListApp.WebApi.Repository.Entities;
 
 [Table("todo_list")]
-public class TodoListEntity
+public class TodoListEntity : BaseEntity
 {
-    [Column("id")]
-    [Key]
-    public int Id { get; set; }
-
     [Column("title")]
-    public string Title { get; set; }
+    public string Title { get; set; } = string.Empty;
 
     [Column("description")]
-    public string Description { get; set; }
+    public string Description { get; set; } = string.Empty;
+
+    public IList<TaskEntity>? Task { get; }
 }

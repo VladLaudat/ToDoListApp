@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TodoListApp.WebApi.Repository;
 
@@ -11,9 +12,10 @@ using TodoListApp.WebApi.Repository;
 namespace TodoListApp.WebApi.Migrations
 {
     [DbContext(typeof(TodoListDbContext))]
-    partial class TodoListDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250210164826_EntitiesV4")]
+    partial class EntitiesV4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -203,108 +205,108 @@ namespace TodoListApp.WebApi.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2025, 2, 10, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4233),
+                            CreatedDate = new DateTime(2025, 2, 10, 18, 48, 25, 774, DateTimeKind.Local).AddTicks(1923),
                             Description = "TaskDescription1",
-                            DueDate = new DateTime(2025, 2, 9, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4262),
+                            DueDate = new DateTime(2025, 2, 9, 18, 48, 25, 774, DateTimeKind.Local).AddTicks(1949),
                             StatusId = 1,
                             Title = "Task1"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2025, 2, 10, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4265),
+                            CreatedDate = new DateTime(2025, 2, 10, 18, 48, 25, 774, DateTimeKind.Local).AddTicks(1952),
                             Description = "TaskDescription2",
-                            DueDate = new DateTime(2025, 2, 24, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4266),
+                            DueDate = new DateTime(2025, 2, 24, 18, 48, 25, 774, DateTimeKind.Local).AddTicks(1953),
                             StatusId = 1,
                             Title = "Task2"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2025, 2, 10, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4269),
+                            CreatedDate = new DateTime(2025, 2, 10, 18, 48, 25, 774, DateTimeKind.Local).AddTicks(1955),
                             Description = "TaskDescription3",
-                            DueDate = new DateTime(2025, 2, 24, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4270),
+                            DueDate = new DateTime(2025, 2, 24, 18, 48, 25, 774, DateTimeKind.Local).AddTicks(1957),
                             StatusId = 1,
                             Title = "Task3"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2025, 2, 10, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4273),
+                            CreatedDate = new DateTime(2025, 2, 10, 18, 48, 25, 774, DateTimeKind.Local).AddTicks(1959),
                             Description = "TaskDescription4",
-                            DueDate = new DateTime(2025, 2, 24, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4274),
+                            DueDate = new DateTime(2025, 2, 24, 18, 48, 25, 774, DateTimeKind.Local).AddTicks(1960),
                             StatusId = 1,
                             Title = "Task4"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedDate = new DateTime(2025, 2, 10, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4276),
+                            CreatedDate = new DateTime(2025, 2, 10, 18, 48, 25, 774, DateTimeKind.Local).AddTicks(1963),
                             Description = "TaskDescription5",
-                            DueDate = new DateTime(2025, 2, 24, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4278),
+                            DueDate = new DateTime(2025, 2, 24, 18, 48, 25, 774, DateTimeKind.Local).AddTicks(1964),
                             StatusId = 1,
                             Title = "Task5"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedDate = new DateTime(2025, 2, 10, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4280),
+                            CreatedDate = new DateTime(2025, 2, 10, 18, 48, 25, 774, DateTimeKind.Local).AddTicks(1966),
                             Description = "TaskDescription6",
-                            DueDate = new DateTime(2025, 2, 9, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4282),
+                            DueDate = new DateTime(2025, 2, 9, 18, 48, 25, 774, DateTimeKind.Local).AddTicks(1968),
                             StatusId = 1,
                             Title = "Task6"
                         },
                         new
                         {
                             Id = 7,
-                            CreatedDate = new DateTime(2025, 2, 10, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4284),
+                            CreatedDate = new DateTime(2025, 2, 10, 18, 48, 25, 774, DateTimeKind.Local).AddTicks(1970),
                             Description = "TaskDescription7",
-                            DueDate = new DateTime(2025, 2, 24, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4286),
+                            DueDate = new DateTime(2025, 2, 24, 18, 48, 25, 774, DateTimeKind.Local).AddTicks(1971),
                             StatusId = 1,
                             Title = "Task7"
                         },
                         new
                         {
                             Id = 8,
-                            CreatedDate = new DateTime(2025, 2, 10, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4288),
+                            CreatedDate = new DateTime(2025, 2, 10, 18, 48, 25, 774, DateTimeKind.Local).AddTicks(1973),
                             Description = "TaskDescription8",
-                            DueDate = new DateTime(2025, 2, 24, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4289),
+                            DueDate = new DateTime(2025, 2, 24, 18, 48, 25, 774, DateTimeKind.Local).AddTicks(1975),
                             StatusId = 1,
                             Title = "Task8"
                         },
                         new
                         {
                             Id = 9,
-                            CreatedDate = new DateTime(2025, 2, 10, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4292),
+                            CreatedDate = new DateTime(2025, 2, 10, 18, 48, 25, 774, DateTimeKind.Local).AddTicks(1977),
                             Description = "TaskDescription9",
-                            DueDate = new DateTime(2025, 2, 24, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4293),
+                            DueDate = new DateTime(2025, 2, 24, 18, 48, 25, 774, DateTimeKind.Local).AddTicks(1978),
                             StatusId = 1,
                             Title = "Task9"
                         },
                         new
                         {
                             Id = 10,
-                            CreatedDate = new DateTime(2025, 2, 10, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4295),
+                            CreatedDate = new DateTime(2025, 2, 10, 18, 48, 25, 774, DateTimeKind.Local).AddTicks(1981),
                             Description = "TaskDescription10",
-                            DueDate = new DateTime(2025, 2, 24, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4297),
+                            DueDate = new DateTime(2025, 2, 24, 18, 48, 25, 774, DateTimeKind.Local).AddTicks(1982),
                             StatusId = 1,
                             Title = "Task10"
                         },
                         new
                         {
                             Id = 11,
-                            CreatedDate = new DateTime(2025, 2, 10, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4299),
+                            CreatedDate = new DateTime(2025, 2, 10, 18, 48, 25, 774, DateTimeKind.Local).AddTicks(1984),
                             Description = "TaskDescription11",
-                            DueDate = new DateTime(2025, 2, 24, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4301),
+                            DueDate = new DateTime(2025, 2, 24, 18, 48, 25, 774, DateTimeKind.Local).AddTicks(1986),
                             StatusId = 1,
                             Title = "Task11"
                         },
                         new
                         {
                             Id = 12,
-                            CreatedDate = new DateTime(2025, 2, 10, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4303),
+                            CreatedDate = new DateTime(2025, 2, 10, 18, 48, 25, 774, DateTimeKind.Local).AddTicks(1988),
                             Description = "TaskDescription12",
-                            DueDate = new DateTime(2025, 2, 24, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4304),
+                            DueDate = new DateTime(2025, 2, 24, 18, 48, 25, 774, DateTimeKind.Local).AddTicks(1989),
                             StatusId = 1,
                             Title = "Task12"
                         });

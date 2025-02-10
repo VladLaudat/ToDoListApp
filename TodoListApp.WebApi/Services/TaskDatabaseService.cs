@@ -29,8 +29,7 @@ public class TaskDatabaseService : ITaskDatabaseService
             Description = model.Description,
             CreatedDate = DateTime.Now,
             DueDate = model.DueDate,
-            Status = model.Status,
-            Tags = model.Tags,
+            StatusId = 1,
             TodoList = model.TodoList,
         });
 

@@ -4,27 +4,23 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace TodoListApp.WebApi.Repository.Entities;
 
 [Table("task")]
-public class TaskEntity
+public class TaskEntity : BaseEntity
 {
-    [Column("id")]
-    [Key]
-    public int Id { get; set; }
-
     [Column("title")]
-    public string Title { get; set; }
+    public string Title { get; set; } = string.Empty;
 
     [Column("description")]
-    public string Description { get; set; }
+    public string Description { get; set; } = string.Empty;
 
     [Column("created_date", TypeName = "date")]
-    public DateTime? CreatedDate { get; set; }
+    public DateTime CreatedDate { get; set; }
 
     [Column("due_date", TypeName = "date")]
-    public DateTime? DueDate { get; set; }
+    public DateTime DueDate { get; set; }
 
     [Column("task_status_id")]
     [ForeignKey(nameof(Status))]
-    public int? StatusId { get; set; }
+    public int StatusId { get; set; }
 
     [Column("todolist_id")]
     [ForeignKey(nameof(TodoList))]
@@ -34,5 +30,5 @@ public class TaskEntity
 
     public TodoListEntity? TodoList { get; set; }
 
-    public IList<TagEntity>? Tags { get; set; }
+    public IList<TagEntity>? Tags { get; }
 }

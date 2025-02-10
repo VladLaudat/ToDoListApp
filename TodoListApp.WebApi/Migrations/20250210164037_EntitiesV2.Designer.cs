@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TodoListApp.WebApi.Repository;
 
@@ -11,9 +12,10 @@ using TodoListApp.WebApi.Repository;
 namespace TodoListApp.WebApi.Migrations
 {
     [DbContext(typeof(TodoListDbContext))]
-    partial class TodoListDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250210164037_EntitiesV2")]
+    partial class EntitiesV2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,7 +53,7 @@ namespace TodoListApp.WebApi.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("comment");
 
-                    b.Property<int>("TaskId")
+                    b.Property<int?>("TaskId")
                         .HasColumnType("int")
                         .HasColumnName("task_id");
 
@@ -65,20 +67,17 @@ namespace TodoListApp.WebApi.Migrations
                         new
                         {
                             Id = 1,
-                            Comment = "Comment1",
-                            TaskId = 1
+                            Comment = "Comment1"
                         },
                         new
                         {
                             Id = 2,
-                            Comment = "Comment2",
-                            TaskId = 1
+                            Comment = "Comment2"
                         },
                         new
                         {
                             Id = 3,
-                            Comment = "Comment3",
-                            TaskId = 1
+                            Comment = "Comment3"
                         });
                 });
 
@@ -178,7 +177,7 @@ namespace TodoListApp.WebApi.Migrations
                         .HasColumnType("date")
                         .HasColumnName("due_date");
 
-                    b.Property<int>("StatusId")
+                    b.Property<int?>("StatusId")
                         .HasColumnType("int")
                         .HasColumnName("task_status_id");
 
@@ -203,109 +202,97 @@ namespace TodoListApp.WebApi.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2025, 2, 10, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4233),
+                            CreatedDate = new DateTime(2025, 2, 10, 18, 40, 37, 106, DateTimeKind.Local).AddTicks(9825),
                             Description = "TaskDescription1",
-                            DueDate = new DateTime(2025, 2, 9, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4262),
-                            StatusId = 1,
+                            DueDate = new DateTime(2025, 2, 9, 18, 40, 37, 106, DateTimeKind.Local).AddTicks(9855),
                             Title = "Task1"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2025, 2, 10, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4265),
+                            CreatedDate = new DateTime(2025, 2, 10, 18, 40, 37, 106, DateTimeKind.Local).AddTicks(9857),
                             Description = "TaskDescription2",
-                            DueDate = new DateTime(2025, 2, 24, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4266),
-                            StatusId = 1,
+                            DueDate = new DateTime(2025, 2, 24, 18, 40, 37, 106, DateTimeKind.Local).AddTicks(9859),
                             Title = "Task2"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2025, 2, 10, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4269),
+                            CreatedDate = new DateTime(2025, 2, 10, 18, 40, 37, 106, DateTimeKind.Local).AddTicks(9861),
                             Description = "TaskDescription3",
-                            DueDate = new DateTime(2025, 2, 24, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4270),
-                            StatusId = 1,
+                            DueDate = new DateTime(2025, 2, 24, 18, 40, 37, 106, DateTimeKind.Local).AddTicks(9863),
                             Title = "Task3"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2025, 2, 10, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4273),
+                            CreatedDate = new DateTime(2025, 2, 10, 18, 40, 37, 106, DateTimeKind.Local).AddTicks(9865),
                             Description = "TaskDescription4",
-                            DueDate = new DateTime(2025, 2, 24, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4274),
-                            StatusId = 1,
+                            DueDate = new DateTime(2025, 2, 24, 18, 40, 37, 106, DateTimeKind.Local).AddTicks(9866),
                             Title = "Task4"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedDate = new DateTime(2025, 2, 10, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4276),
+                            CreatedDate = new DateTime(2025, 2, 10, 18, 40, 37, 106, DateTimeKind.Local).AddTicks(9868),
                             Description = "TaskDescription5",
-                            DueDate = new DateTime(2025, 2, 24, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4278),
-                            StatusId = 1,
+                            DueDate = new DateTime(2025, 2, 24, 18, 40, 37, 106, DateTimeKind.Local).AddTicks(9870),
                             Title = "Task5"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedDate = new DateTime(2025, 2, 10, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4280),
+                            CreatedDate = new DateTime(2025, 2, 10, 18, 40, 37, 106, DateTimeKind.Local).AddTicks(9872),
                             Description = "TaskDescription6",
-                            DueDate = new DateTime(2025, 2, 9, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4282),
-                            StatusId = 1,
+                            DueDate = new DateTime(2025, 2, 9, 18, 40, 37, 106, DateTimeKind.Local).AddTicks(9873),
                             Title = "Task6"
                         },
                         new
                         {
                             Id = 7,
-                            CreatedDate = new DateTime(2025, 2, 10, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4284),
+                            CreatedDate = new DateTime(2025, 2, 10, 18, 40, 37, 106, DateTimeKind.Local).AddTicks(9876),
                             Description = "TaskDescription7",
-                            DueDate = new DateTime(2025, 2, 24, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4286),
-                            StatusId = 1,
+                            DueDate = new DateTime(2025, 2, 24, 18, 40, 37, 106, DateTimeKind.Local).AddTicks(9877),
                             Title = "Task7"
                         },
                         new
                         {
                             Id = 8,
-                            CreatedDate = new DateTime(2025, 2, 10, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4288),
+                            CreatedDate = new DateTime(2025, 2, 10, 18, 40, 37, 106, DateTimeKind.Local).AddTicks(9879),
                             Description = "TaskDescription8",
-                            DueDate = new DateTime(2025, 2, 24, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4289),
-                            StatusId = 1,
+                            DueDate = new DateTime(2025, 2, 24, 18, 40, 37, 106, DateTimeKind.Local).AddTicks(9881),
                             Title = "Task8"
                         },
                         new
                         {
                             Id = 9,
-                            CreatedDate = new DateTime(2025, 2, 10, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4292),
+                            CreatedDate = new DateTime(2025, 2, 10, 18, 40, 37, 106, DateTimeKind.Local).AddTicks(9883),
                             Description = "TaskDescription9",
-                            DueDate = new DateTime(2025, 2, 24, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4293),
-                            StatusId = 1,
+                            DueDate = new DateTime(2025, 2, 24, 18, 40, 37, 106, DateTimeKind.Local).AddTicks(9884),
                             Title = "Task9"
                         },
                         new
                         {
                             Id = 10,
-                            CreatedDate = new DateTime(2025, 2, 10, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4295),
+                            CreatedDate = new DateTime(2025, 2, 10, 18, 40, 37, 106, DateTimeKind.Local).AddTicks(9886),
                             Description = "TaskDescription10",
-                            DueDate = new DateTime(2025, 2, 24, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4297),
-                            StatusId = 1,
+                            DueDate = new DateTime(2025, 2, 24, 18, 40, 37, 106, DateTimeKind.Local).AddTicks(9888),
                             Title = "Task10"
                         },
                         new
                         {
                             Id = 11,
-                            CreatedDate = new DateTime(2025, 2, 10, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4299),
+                            CreatedDate = new DateTime(2025, 2, 10, 18, 40, 37, 106, DateTimeKind.Local).AddTicks(9890),
                             Description = "TaskDescription11",
-                            DueDate = new DateTime(2025, 2, 24, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4301),
-                            StatusId = 1,
+                            DueDate = new DateTime(2025, 2, 24, 18, 40, 37, 106, DateTimeKind.Local).AddTicks(9891),
                             Title = "Task11"
                         },
                         new
                         {
                             Id = 12,
-                            CreatedDate = new DateTime(2025, 2, 10, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4303),
+                            CreatedDate = new DateTime(2025, 2, 10, 18, 40, 37, 106, DateTimeKind.Local).AddTicks(9893),
                             Description = "TaskDescription12",
-                            DueDate = new DateTime(2025, 2, 24, 18, 51, 57, 872, DateTimeKind.Local).AddTicks(4304),
-                            StatusId = 1,
+                            DueDate = new DateTime(2025, 2, 24, 18, 40, 37, 106, DateTimeKind.Local).AddTicks(9895),
                             Title = "Task12"
                         });
                 });
@@ -427,9 +414,7 @@ namespace TodoListApp.WebApi.Migrations
                 {
                     b.HasOne("TodoListApp.WebApi.Repository.Entities.TaskEntity", "Task")
                         .WithMany()
-                        .HasForeignKey("TaskId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TaskId");
 
                     b.Navigation("Task");
                 });
@@ -438,9 +423,7 @@ namespace TodoListApp.WebApi.Migrations
                 {
                     b.HasOne("TodoListApp.WebApi.Repository.Entities.StatusEntity", "Status")
                         .WithMany()
-                        .HasForeignKey("StatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("StatusId");
 
                     b.HasOne("TodoListApp.WebApi.Repository.Entities.TodoListEntity", "TodoList")
                         .WithMany("Task")
