@@ -1,5 +1,8 @@
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Logging;
+using TodoListApp.WebApi.Controllers.Logging;
 
 namespace TodoListApp.WebApi.Filters;
 
@@ -16,9 +19,15 @@ public class Exception500Filter : IExceptionFilter
     {
         ArgumentNullException.ThrowIfNull(context);
 
-        if (context.Exception != null)
+        if (context.Exception == null)
         {
-            context.Result = new JsonResult("Unexpected error occurred") { StatusCode = 500 };
+            return;
         }
+
+        var controller = context.RouteData.Values["controller"]?.ToString();
+        var action = context.RouteData.Values["action"]?.ToString();
+
+        this.logger.UnexpectedExceptionThrown(controller!, action!, context.Exception);
+        context.Result = new JsonResult("Unexpected error occurred") { StatusCode = 500 };
     }
 }
