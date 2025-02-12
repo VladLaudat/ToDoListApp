@@ -29,7 +29,8 @@ public class TodoListController : ControllerBase
     [ProducesResponseType(typeof(int), StatusCodes.Status500InternalServerError)]
     public IActionResult Get([FromQuery] int page = 1, [FromQuery] int pageSize = 4)
     {
-        try
+        throw new NotImplementedException();
+        /*try
         {
             var response = this.Ok(this.todoListDatabaseService.Read(page, pageSize));
             this.logger.RequestSuccesfullyHandled();
@@ -39,7 +40,7 @@ public class TodoListController : ControllerBase
         {
             this.logger.DbThrewException(ex);
             return this.StatusCode(500);
-        }
+        }*/
     }
 
     [HttpGet]

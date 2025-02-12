@@ -20,7 +20,7 @@ public class BaseDatabaseService<TEntity, TService> : IBaseDatabaseService<TEnti
 
     protected TodoListDbContext DbContext { get; }
 
-    public void Add(TEntity entity)
+    public virtual void Add(TEntity entity)
     {
         ArgumentNullException.ThrowIfNull(entity);
 
@@ -29,7 +29,7 @@ public class BaseDatabaseService<TEntity, TService> : IBaseDatabaseService<TEnti
         _ = this.DbContext.SaveChanges();
     }
 
-    public void Delete(int id)
+    public virtual void Delete(int id)
     {
         var entity = this.DbContext.Set<TEntity>().FirstOrDefault(x => x.Id == id);
 
@@ -42,7 +42,7 @@ public class BaseDatabaseService<TEntity, TService> : IBaseDatabaseService<TEnti
         _ = this.DbContext.SaveChanges();
     }
 
-    public IList<TEntity> Read(int page = 1, int pageSize = 4)
+    public virtual IList<TEntity> Read(int page = 1, int pageSize = 4)
     {
         var entities = this.DbContext.Set<TEntity>().
             Skip((page - 1) * pageSize)
@@ -51,14 +51,14 @@ public class BaseDatabaseService<TEntity, TService> : IBaseDatabaseService<TEnti
         return entities;
     }
 
-    public TEntity ReadById(int id)
+    public virtual TEntity ReadById(int id)
     {
         var entity = this.DbContext.Set<TEntity>().First(x => x.Id == id);
 
         return entity;
     }
 
-    public void Update(TEntity entity)
+    public virtual void Update(TEntity entity)
     {
         var entityExists = this.DbContext.Set<TEntity>().Any(x => x.Id == entity.Id);
 
@@ -71,7 +71,7 @@ public class BaseDatabaseService<TEntity, TService> : IBaseDatabaseService<TEnti
         _ = this.DbContext.SaveChanges();
     }
 
-    public int Count()
+    public virtual int Count()
     {
         var count = this.DbContext.Set<TEntity>().Count();
 
