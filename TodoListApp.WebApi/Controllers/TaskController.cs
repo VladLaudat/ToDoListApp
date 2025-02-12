@@ -6,20 +6,14 @@ using TodoListApp.WebApi.Repository.Entities;
 using TodoListApp.WebApi.Services.Interfaces;
 
 namespace TodoListApp.WebApi.Controllers;
-[Route("[controller]/[action]")]
-[ApiController]
-public class TaskController : ControllerBase
+public class TaskController : BaseController<TaskEntity, TaskController>
 {
-    private readonly ILogger<TaskController> logger;
-    private readonly IBaseDatabaseService<TaskEntity> taskDatabaseService;
-
     public TaskController(IBaseDatabaseService<TaskEntity> taskDatabaseService, ILogger<TaskController> logger)
+        : base(taskDatabaseService, logger)
     {
-        this.taskDatabaseService = taskDatabaseService;
-        this.logger = logger;
     }
 
-    [HttpGet]
+    /*[HttpGet]
     [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(int), StatusCodes.Status500InternalServerError)]
     public IActionResult Get([FromQuery] int page = 1, [FromQuery] int pageSize = 4)
@@ -125,5 +119,5 @@ public class TaskController : ControllerBase
             this.logger.DbThrewException(ex);
             return this.StatusCode(500);
         }
-    }
+    }*/
 }

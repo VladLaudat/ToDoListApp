@@ -12,16 +12,16 @@ public class BaseController<TEntity, TController> : ControllerBase, ICrudControl
     where TEntity : BaseEntity
     where TController : BaseController<TEntity, TController>
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S6672:Generic logger injection should match enclosing type", Justification = "Misfire")]
+    public BaseController(IBaseDatabaseService<TEntity> service, ILogger<TController> logger)
+    {
+        this.Service = service;
+        this.Logger = logger;
+    }
+
     protected ILogger<TController> Logger { get; }
 
     protected IBaseDatabaseService<TEntity> Service { get; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S6672:Generic logger injection should match enclosing type", Justification = "Misfire")]
-    public BaseController(ILogger<TController> logger, IBaseDatabaseService<TEntity> service)
-    {
-        this.Logger = logger;
-        this.Service = service;
-    }
 
     [HttpGet]
     [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
@@ -33,7 +33,7 @@ public class BaseController<TEntity, TController> : ControllerBase, ICrudControl
 
     [HttpGet]
     [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
-    public IActionResult GetById(int id)
+    public IActionResult GetById([FromQuery] int id)
     {
         var response = this.Service.ReadById(id);
         return this.Ok(response);
@@ -41,7 +41,7 @@ public class BaseController<TEntity, TController> : ControllerBase, ICrudControl
 
     [HttpPost]
     [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
-    public IActionResult Add(TEntity entity)
+    public IActionResult Add([FromBody] TEntity entity)
     {
         this.Service.Add(entity);
         return this.Ok();
@@ -49,7 +49,7 @@ public class BaseController<TEntity, TController> : ControllerBase, ICrudControl
 
     [HttpDelete]
     [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
-    public IActionResult Delete(int id)
+    public IActionResult Delete([FromQuery] int id)
     {
         this.Service.Delete(id);
         return this.Ok();
@@ -57,7 +57,7 @@ public class BaseController<TEntity, TController> : ControllerBase, ICrudControl
 
     [HttpPut]
     [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
-    public IActionResult Update(TEntity entity)
+    public IActionResult Update([FromBody] TEntity entity)
     {
         this.Service.Update(entity);
         return this.Ok();

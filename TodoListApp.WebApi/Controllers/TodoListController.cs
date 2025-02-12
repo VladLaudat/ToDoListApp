@@ -11,26 +11,19 @@ using TodoListApp.WebApi.Services.Interfaces;
 using TodoListApp.WebApi.Services.Logging;
 
 namespace TodoListApp.WebApi.Controllers;
-[Route("[controller]/[action]")]
-[ApiController]
-public class TodoListController : ControllerBase
+public class TodoListController : BaseController<TodoListEntity, TodoListController>
 {
-    private readonly ILogger<TodoListController> logger;
-    private readonly IBaseDatabaseService<TodoListEntity> todoListDatabaseService;
-
     public TodoListController(IBaseDatabaseService<TodoListEntity> todoListDatabaseService, ILogger<TodoListController> logger)
+        : base(todoListDatabaseService, logger)
     {
-        this.todoListDatabaseService = todoListDatabaseService;
-        this.logger = logger;
     }
 
-    [HttpGet]
+    /*[HttpGet]
     [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(int), StatusCodes.Status500InternalServerError)]
     public IActionResult Get([FromQuery] int page = 1, [FromQuery] int pageSize = 4)
     {
-        throw new NotImplementedException();
-        /*try
+        try
         {
             var response = this.Ok(this.todoListDatabaseService.Read(page, pageSize));
             this.logger.RequestSuccesfullyHandled();
@@ -40,7 +33,7 @@ public class TodoListController : ControllerBase
         {
             this.logger.DbThrewException(ex);
             return this.StatusCode(500);
-        }*/
+        }
     }
 
     [HttpGet]
@@ -131,5 +124,5 @@ public class TodoListController : ControllerBase
             this.logger.DbThrewException(ex);
             return this.StatusCode(500);
         }
-    }
+    }*/
 }
