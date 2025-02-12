@@ -14,4 +14,6 @@ public interface IBaseDatabaseService<TEntity>
     public void Update(TEntity entity);
 
     public void Delete(int id);
+
+    public int Count();
 }

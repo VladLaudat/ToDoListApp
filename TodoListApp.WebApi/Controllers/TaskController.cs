@@ -2,6 +2,7 @@ using System.Data.Common;
 using Microsoft.AspNetCore.Mvc;
 using TodoListApp.WebApi.Controllers.Logging;
 using TodoListApp.WebApi.Models;
+using TodoListApp.WebApi.Repository.Entities;
 using TodoListApp.WebApi.Services.Interfaces;
 
 namespace TodoListApp.WebApi.Controllers;
@@ -10,9 +11,9 @@ namespace TodoListApp.WebApi.Controllers;
 public class TaskController : ControllerBase
 {
     private readonly ILogger<TaskController> logger;
-    private readonly ITaskDatabaseService taskDatabaseService;
+    private readonly IBaseDatabaseService<TaskEntity> taskDatabaseService;
 
-    public TaskController(ITaskDatabaseService taskDatabaseService, ILogger<TaskController> logger)
+    public TaskController(IBaseDatabaseService<TaskEntity> taskDatabaseService, ILogger<TaskController> logger)
     {
         this.taskDatabaseService = taskDatabaseService;
         this.logger = logger;
@@ -57,11 +58,11 @@ public class TaskController : ControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(int), StatusCodes.Status500InternalServerError)]
-    public IActionResult Add(TaskModel model)
+    public IActionResult Add(TaskEntity entity)
     {
         try
         {
-            this.taskDatabaseService.Add(model);
+            this.taskDatabaseService.Add(entity);
             this.logger.RequestSuccesfullyHandled();
             return this.Ok();
         }
@@ -93,11 +94,11 @@ public class TaskController : ControllerBase
     [HttpPut]
     [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(int), StatusCodes.Status500InternalServerError)]
-    public IActionResult Update(TaskModel model)
+    public IActionResult Update(TaskEntity entity)
     {
         try
         {
-            this.taskDatabaseService.Update(model);
+            this.taskDatabaseService.Update(entity);
             this.logger.RequestSuccesfullyHandled();
             return this.Ok();
         }

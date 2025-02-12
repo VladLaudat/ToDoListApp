@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using TodoListApp.WebApi.Repository;
 using TodoListApp.WebApi.Repository.Entities;
 using TodoListApp.WebApi.Services.Interfaces;
@@ -59,14 +60,21 @@ public class BaseDatabaseService<TEntity, TService> : IBaseDatabaseService<TEnti
 
     public void Update(TEntity entity)
     {
-        var matchingEntity = this.DbContext.Set<TEntity>().FirstOrDefault(x => x.Id == entity.Id);
+        var entityExists = this.DbContext.Set<TEntity>().Any(x => x.Id == entity.Id);
 
-        if (matchingEntity == null)
+        if (!entityExists)
         {
             return;
         }
 
         _ = this.DbContext.Set<TEntity>().Update(entity);
         _ = this.DbContext.SaveChanges();
+    }
+
+    public int Count()
+    {
+        var count = this.DbContext.Set<TEntity>().Count();
+
+        return count;
     }
 }

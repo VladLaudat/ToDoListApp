@@ -7,18 +7,14 @@ using TodoListApp.WebApi.Services.Interfaces;
 using TodoListApp.WebApi.Services.Logging;
 
 namespace TodoListApp.WebApi.Services;
-public class TaskDatabaseService : ITaskDatabaseService
+public class TaskDatabaseService : BaseDatabaseService<TaskEntity, TaskDatabaseService>
 {
-    private readonly ILogger<TaskDatabaseService> logger;
-    private readonly TodoListDbContext dbContext;
-
     public TaskDatabaseService(TodoListDbContext dbContext, ILogger<TaskDatabaseService> logger)
+        : base(dbContext, logger)
     {
-        this.dbContext = dbContext;
-        this.logger = logger;
     }
 
-    public void Add(TaskModel model)
+    /*public void Add(TaskModel model)
     {
         ArgumentNullException.ThrowIfNull(model);
 
@@ -114,5 +110,5 @@ public class TaskDatabaseService : ITaskDatabaseService
         _ = this.dbContext.SaveChanges();
 
         this.logger.EditedTask();
-    }
+    }*/
 }

@@ -63,11 +63,11 @@ public class TodoListController : ControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(int), StatusCodes.Status500InternalServerError)]
-    public IActionResult Add(TodoListModel model)
+    public IActionResult Add(TodoListEntity entity)
     {
         try
         {
-            this.todoListDatabaseService.Add(model);
+            this.todoListDatabaseService.Add(entity);
             this.logger.RequestSuccesfullyHandled();
             return this.Ok();
         }
@@ -99,11 +99,11 @@ public class TodoListController : ControllerBase
     [HttpPut]
     [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(int), StatusCodes.Status500InternalServerError)]
-    public IActionResult Update(TodoListModel model)
+    public IActionResult Update(TodoListEntity entity)
     {
         try
         {
-            this.todoListDatabaseService.Update(model);
+            this.todoListDatabaseService.Update(entity);
             this.logger.RequestSuccesfullyHandled();
             return this.Ok();
         }

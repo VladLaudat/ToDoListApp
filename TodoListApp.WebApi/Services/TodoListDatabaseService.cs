@@ -91,9 +91,9 @@ public class TodoListDatabaseService : BaseDatabaseService<TodoListEntity, TodoL
 
     public int Count()
     {
-        var count = this.dbContext.TodoList.Count();
+        var count = this.DbContext.TodoList.Count();
 
-        this.logger.CountedTodoLists();
+        this.Logger.CountedTodoLists();
 
         return count;
     }*/
