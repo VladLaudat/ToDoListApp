@@ -15,10 +15,13 @@ builder.Services.AddControllers(cfg =>
 });
 builder.Services.AddDbContext<TodoListDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnection"]);
+    _ = options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnection"]);
 });
 builder.Services.AddScoped<IBaseDatabaseService<TodoListEntity>, TodoListDatabaseService>();
 builder.Services.AddScoped<IBaseDatabaseService<TaskEntity>, TaskDatabaseService>();
+builder.Services.AddScoped<IBaseDatabaseService<CommentEntity>, CommentDatabaseService>();
+builder.Services.AddScoped<IBaseDatabaseService<TagEntity>, TagDatabaseService>();
+builder.Services.AddScoped<IBaseDatabaseService<StatusEntity>, StatusDatabaseService>();
 
 var app = builder.Build();
 

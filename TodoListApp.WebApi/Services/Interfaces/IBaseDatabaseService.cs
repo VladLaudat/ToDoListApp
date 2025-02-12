@@ -1,4 +1,3 @@
-using TodoListApp.WebApi.Models;
 using TodoListApp.WebApi.Repository.Entities;
 
 namespace TodoListApp.WebApi.Services.Interfaces;

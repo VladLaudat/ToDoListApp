@@ -1,4 +1,3 @@
-using Microsoft.EntityFrameworkCore;
 using TodoListApp.WebApi.Repository;
 using TodoListApp.WebApi.Repository.Entities;
 using TodoListApp.WebApi.Services.Interfaces;
