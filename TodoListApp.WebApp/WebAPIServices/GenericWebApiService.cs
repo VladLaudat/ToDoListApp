@@ -79,7 +79,7 @@ public class GenericWebApiService<TViewModel, TService> : IGenericWebApiSerice<T
 
     public async Task<IList<TViewModel>> List(int page = 1)
     {
-        var uri = this.Helpers.GetEndpointUriGenerator(page);
+        var uri = this.Helpers.ListEndpointUriGenerator(page);
 
         var response = await this.HttpClient.GetAsync(uri);
 

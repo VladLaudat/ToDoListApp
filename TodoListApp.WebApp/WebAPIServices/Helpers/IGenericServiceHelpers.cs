@@ -8,7 +8,7 @@ public interface IGenericServiceHelpers
 
     public Uri DeleteEndpointUriGenerator(int id);
 
-    Uri GetEndpointUriGenerator(int page);
+    Uri ListEndpointUriGenerator(int page);
 
     Uri GetByIdEndpointUriGenerator(int id);
 

@@ -61,14 +61,14 @@ public class GenericServiceHelpers<TViewModel> : IGenericServiceHelpers
         return uriBuilder.Uri;
     }
 
-    public Uri GetEndpointUriGenerator(int page)
+    public Uri ListEndpointUriGenerator(int page)
     {
         string baseURL = this.configuration["WebAPIURL:BaseURL"];
 
         var uriBuilder = new UriBuilder(baseURL)
         {
-            Path = $"{this.configuration[$"WebAPIURL:Endpoints:{nameof(TViewModel)}:Controller"]}/{this.configuration[$"WebAPIURL:Endpoints:{nameof(TViewModel)}:Get"]}",
-            Query = $"{nameof(page)}={page}",
+            Path = $"{this.configuration[$"WebAPIURL:Endpoints:{nameof(TViewModel)}:Controller"]}/{this.configuration[$"WebAPIURL:Endpoints:{nameof(TViewModel)}:List"]}",
+            Query = $"{nameof(page)}={page}&pagesize={this.configuration["Constants:ListingEndpointsPageSize"]}",
         };
 
         return uriBuilder.Uri;
