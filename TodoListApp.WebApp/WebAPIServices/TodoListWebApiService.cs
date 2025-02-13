@@ -1,30 +1,16 @@
-using System.Net;
-using System.Net.Http.Json;
-using System.Text;
-using System.Text.Json;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using TodoListApp.WebApp.ViewModels;
 using TodoListApp.WebApp.WebAPIServices.Helpers;
-using TodoListApp.WebApp.WebAPIServices.Interfaces;
-using TodoListApp.WebApp.WebAPIServices.Logging;
 
 namespace TodoListApp.WebApp.WebAPIServices;
 
-public class TodoListWebApiService : ITodoListWebApiService
+public class TodoListWebApiService : GenericWebApiService<TodoListViewModel, TodoListWebApiService>
 {
-    private readonly ILogger<TodoListWebApiService> logger;
-    private readonly HttpClient httpClient;
-    private readonly ITodoListHelpers todoListHelpers;
-
-    public TodoListWebApiService(ILogger<TodoListWebApiService> logger, HttpClient httpClient, ITodoListHelpers todoListHelpers)
+    public TodoListWebApiService(GenericServiceHelpers<TodoListViewModel> taskHelpers, HttpClient httpClient, ILogger<TodoListWebApiService> logger)
+        : base(taskHelpers, httpClient, logger)
     {
-        this.logger = logger;
-        this.httpClient = httpClient;
-        this.todoListHelpers = todoListHelpers;
-
     }
 
-    public async Task<IList<TodoListViewModel>> List(int page = 1)
+    /*public async Task<IList<TodoListViewModel>> List(int page = 1)
     {
         var uri = this.todoListHelpers.TodoListGetEndpointUriGenerator(page);
 
@@ -102,5 +88,5 @@ public class TodoListWebApiService : ITodoListWebApiService
 
         this.logger.CountedTodoListSuccessfully();
         return count;
-    }
+    }*/
 }

@@ -1,4 +1,6 @@
+using TodoListApp.WebApp.ViewModels;
 using TodoListApp.WebApp.WebAPIServices;
+using TodoListApp.WebApp.WebAPIServices.Helpers;
 using TodoListApp.WebApp.WebAPIServices.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,12 +9,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
 
-builder.Services.AddScoped<ITodoListWebApiService, TodoListWebApiService>();
-builder.Services.AddScoped<TodoListApp.WebApp.WebAPIServices.Helpers.ITodoListHelpers, TodoListApp.WebApp.WebAPIServices.Helpers.TodoListHelpers>();
+builder.Services.AddScoped<GenericWebApiService<TodoListViewModel, TodoListWebApiService>, TodoListWebApiService>();
+builder.Services.AddScoped<IGenericServiceHelpers<TodoListViewModel>, GenericServiceHelpers<TodoListViewModel>>();
 builder.Services.AddScoped<TodoListApp.WebApp.Controllers.Helpers.ITodoListHelpers, TodoListApp.WebApp.Controllers.Helpers.TodoListHelpers>();
 
-builder.Services.AddScoped<ITaskWebApiService, TaskWebApiService>();
-builder.Services.AddScoped<TodoListApp.WebApp.Controllers.Helpers.ITaskHelpers, TodoListApp.WebApp.Controllers.Helpers.TaskHelpers>();
+builder.Services.AddScoped<GenericWebApiService<TaskViewModel, TaskWebApiService>, TaskWebApiService>();
+builder.Services.AddScoped<IGenericServiceHelpers<TaskViewModel>, GenericServiceHelpers<TaskViewModel>>();
 builder.Services.AddScoped<TodoListApp.WebApp.WebAPIServices.Helpers.ITaskHelpers, TodoListApp.WebApp.WebAPIServices.Helpers.TaskHelpers>();
 
 var app = builder.Build();

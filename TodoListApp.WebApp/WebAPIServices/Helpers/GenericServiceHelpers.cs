@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace TodoListApp.WebApp.WebAPIServices.Helpers;
 
-public class GenericServiceHelpers<TViewModel> : IGenericServiceHelpers
+public class GenericServiceHelpers<TViewModel> : IGenericServiceHelpers<TViewModel>
 {
     private readonly IConfiguration configuration;
 

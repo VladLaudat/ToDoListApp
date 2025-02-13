@@ -1,28 +1,16 @@
-using System.Net;
-using System.Text;
-using System.Text.Json;
-using TodoListApp.WebApp.Models.JsonDeserializationModels;
 using TodoListApp.WebApp.ViewModels;
 using TodoListApp.WebApp.WebAPIServices.Helpers;
-using TodoListApp.WebApp.WebAPIServices.Interfaces;
-using TodoListApp.WebApp.WebAPIServices.Logging;
 
 namespace TodoListApp.WebApp.WebAPIServices;
 
-public class TaskWebApiService : ITaskWebApiService
+public class TaskWebApiService : GenericWebApiService<TaskViewModel, TaskWebApiService>
 {
-    private readonly ILogger<TaskWebApiService> logger;
-    private readonly HttpClient httpClient;
-    private readonly ITaskHelpers taskHelpers;
-
-    public TaskWebApiService(ILogger<TaskWebApiService> logger, HttpClient httpClient, ITaskHelpers taskHelpers)
+    public TaskWebApiService(GenericServiceHelpers<TaskViewModel> taskHelpers, HttpClient httpClient, ILogger<TaskWebApiService> logger)
+        : base(taskHelpers, httpClient, logger)
     {
-        this.logger = logger;
-        this.httpClient = httpClient;
-        this.taskHelpers = taskHelpers;
     }
 
-    public async Task<IList<TaskViewModel>> List(int page = 1)
+    /*public async Task<IList<TaskViewModel>> List(int page = 1)
     {
         var uri = this.taskHelpers.TaskGetEndpointUriGenerator(page);
 
@@ -100,5 +88,5 @@ public class TaskWebApiService : ITaskWebApiService
         {
             this.logger.UpdatedTaskSuccessfully();
         }
-    }
+    }*/
 }
