@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace TodoListApp.WebApp.WebAPIServices.Helpers;
 
-public class GenericServiceHelpers<TViewModel> : IGenericServiceHelpers<TViewModel>
+public class GenericServiceHelpers<TModel> : IGenericServiceHelpers<TModel>
 {
     private readonly IConfiguration configuration;
 
@@ -17,7 +17,7 @@ public class GenericServiceHelpers<TViewModel> : IGenericServiceHelpers<TViewMod
 
         var uriBuilder = new UriBuilder(baseURL)
         {
-            Path = $"{this.configuration[$"WebAPIURL:Endpoints:{nameof(TViewModel)}:Controller"]}/{this.configuration[$"WebAPIURL:Endpoints:{nameof(TViewModel)}:Add"]}",
+            Path = $"{this.configuration[$"WebAPIURL:Endpoints:{nameof(TModel)}:Controller"]}/{this.configuration[$"WebAPIURL:Endpoints:{nameof(TModel)}:Add"]}",
         };
 
         return uriBuilder.Uri;
@@ -29,7 +29,7 @@ public class GenericServiceHelpers<TViewModel> : IGenericServiceHelpers<TViewMod
 
         var uriBuilder = new UriBuilder(baseURL)
         {
-            Path = $"{this.configuration[$"WebAPIURL:Endpoints:{nameof(TViewModel)}:Controller"]}/{this.configuration[$"WebAPIURL:Endpoints:{nameof(TViewModel)}:Count"]}",
+            Path = $"{this.configuration[$"WebAPIURL:Endpoints:{nameof(TModel)}:Controller"]}/{this.configuration[$"WebAPIURL:Endpoints:{nameof(TModel)}:Count"]}",
         };
 
         return uriBuilder.Uri;
@@ -41,7 +41,7 @@ public class GenericServiceHelpers<TViewModel> : IGenericServiceHelpers<TViewMod
 
         var uriBuilder = new UriBuilder(baseURL)
         {
-            Path = $"{this.configuration[$"WebAPIURL:Endpoints:{nameof(TViewModel)}:Controller"]}/{this.configuration[$"WebAPIURL:Endpoints:{nameof(TViewModel)}:Delete"]}",
+            Path = $"{this.configuration[$"WebAPIURL:Endpoints:{nameof(TModel)}:Controller"]}/{this.configuration[$"WebAPIURL:Endpoints:{nameof(TModel)}:Delete"]}",
             Query = $"{nameof(id)}={id}",
         };
 
@@ -54,7 +54,7 @@ public class GenericServiceHelpers<TViewModel> : IGenericServiceHelpers<TViewMod
 
         var uriBuilder = new UriBuilder(baseURL)
         {
-            Path = $"{this.configuration[$"WebAPIURL:Endpoints:{nameof(TViewModel)}:Controller"]}/{this.configuration[$"WebAPIURL:Endpoints:{nameof(TViewModel)}:GetById"]}",
+            Path = $"{this.configuration[$"WebAPIURL:Endpoints:{nameof(TModel)}:Controller"]}/{this.configuration[$"WebAPIURL:Endpoints:{nameof(TModel)}:GetById"]}",
             Query = $"{nameof(id)}={id}",
         };
 
@@ -67,7 +67,7 @@ public class GenericServiceHelpers<TViewModel> : IGenericServiceHelpers<TViewMod
 
         var uriBuilder = new UriBuilder(baseURL)
         {
-            Path = $"{this.configuration[$"WebAPIURL:Endpoints:{nameof(TViewModel)}:Controller"]}/{this.configuration[$"WebAPIURL:Endpoints:{nameof(TViewModel)}:List"]}",
+            Path = $"{this.configuration[$"WebAPIURL:Endpoints:{nameof(TModel)}:Controller"]}/{this.configuration[$"WebAPIURL:Endpoints:{nameof(TModel)}:List"]}",
             Query = $"{nameof(page)}={page}&pagesize={this.configuration["Constants:ListingEndpointsPageSize"]}",
         };
 
@@ -80,7 +80,7 @@ public class GenericServiceHelpers<TViewModel> : IGenericServiceHelpers<TViewMod
 
         var uriBuilder = new UriBuilder(baseURL)
         {
-            Path = $"{this.configuration[$"WebAPIURL:Endpoints:{nameof(TViewModel)}:Controller"]}/{this.configuration[$"WebAPIURL:Endpoints:{nameof(TViewModel)}:Update"]}",
+            Path = $"{this.configuration[$"WebAPIURL:Endpoints:{nameof(TModel)}:Controller"]}/{this.configuration[$"WebAPIURL:Endpoints:{nameof(TModel)}:Update"]}",
         };
 
         return uriBuilder.Uri;

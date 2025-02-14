@@ -1,16 +1,14 @@
-using TodoListApp.WebApp.ViewModels;
-
 namespace TodoListApp.WebApp.WebAPIServices.Interfaces;
 
-public interface IGenericWebApiSerice<TViewModel>
+public interface IGenericWebApiSerice<TModel>
 {
-    public Task<IList<TViewModel>> List(int page = 1);
+    public Task<IList<TModel>> List(int page = 1);
 
-    public Task<TViewModel?> GetById(int id);
+    public Task<TModel?> GetById(int id);
 
-    public Task Add(TViewModel webApiModel);
+    public Task Add(TModel webApiModel);
 
-    public Task Update(TViewModel webApiModel);
+    public Task Update(TModel webApiModel);
 
     public Task Delete(int id);
 

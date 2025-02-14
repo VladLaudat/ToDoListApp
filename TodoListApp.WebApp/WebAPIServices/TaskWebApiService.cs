@@ -3,10 +3,10 @@ using TodoListApp.WebApp.WebAPIServices.Helpers;
 
 namespace TodoListApp.WebApp.WebAPIServices;
 
-public class TaskWebApiService : GenericWebApiService<TaskViewModel, TaskWebApiService>
+public class TaskWebApiService : GenericWebApiService<Models.Task, TaskWebApiService>
 {
-    public TaskWebApiService(GenericServiceHelpers<TaskViewModel> taskHelpers, HttpClient httpClient, ILogger<TaskWebApiService> logger)
-        : base(taskHelpers, httpClient, logger)
+    public TaskWebApiService(GenericServiceHelpers<Models.Task> helpers, HttpClient httpClient, ILogger<TaskWebApiService> logger)
+        : base(helpers, httpClient, logger)
     {
     }
 

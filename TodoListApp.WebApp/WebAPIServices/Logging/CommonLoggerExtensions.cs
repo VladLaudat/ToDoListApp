@@ -32,33 +32,33 @@ public static class CommonLoggerExtensions
             new EventId(0, nameof(ApiCountRequestSuccessful)),
             "Retrieved number of records of {Type} from API");
 
-    public static void ApiListRequestSuccessful<TEntity>(this ILogger logger)
+    public static void ApiListRequestSuccessful<TModel>(this ILogger logger)
     {
-        ListRequestSuccessful(logger, typeof(TEntity), null);
+        ListRequestSuccessful(logger, typeof(TModel), null);
     }
 
-    public static void ApiRetieveByIdRequestSuccessful<TEntity>(this ILogger logger)
+    public static void ApiRetieveByIdRequestSuccessful<TModel>(this ILogger logger)
     {
-        RetrieveByIdRequestSuccessful(logger, typeof(TEntity), null);
+        RetrieveByIdRequestSuccessful(logger, typeof(TModel), null);
     }
 
-    public static void ApiDeleteRequestSuccessful<TEntity>(this ILogger logger)
+    public static void ApiDeleteRequestSuccessful<TModel>(this ILogger logger)
     {
-        DeleteRequestSuccessful(logger, typeof(TEntity), null);
+        DeleteRequestSuccessful(logger, typeof(TModel), null);
     }
 
-    public static void ApiUpdateRequestSuccessful<TEntity>(this ILogger logger)
+    public static void ApiUpdateRequestSuccessful<TModel>(this ILogger logger)
     {
-        UpdateRequestSuccessful(logger, typeof(TEntity), null);
+        UpdateRequestSuccessful(logger, typeof(TModel), null);
     }
 
-    public static void ApiAddRequestSuccessful<TEntity>(this ILogger logger)
+    public static void ApiAddRequestSuccessful<TModel>(this ILogger logger)
     {
-        AddRequestSuccessful(logger, typeof(TEntity), null);
+        AddRequestSuccessful(logger, typeof(TModel), null);
     }
 
-    public static void ApiCountRequestSuccessful<TEntity>(this ILogger logger)
+    public static void ApiCountRequestSuccessful<TModel>(this ILogger logger)
     {
-        CountRequestSuccessful(logger, typeof(TEntity), null);
+        CountRequestSuccessful(logger, typeof(TModel), null);
     }
 }

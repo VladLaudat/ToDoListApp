@@ -4,15 +4,13 @@ using System.Text;
 using TodoListApp.WebApp.WebAPIServices.Helpers;
 using TodoListApp.WebApp.WebAPIServices.Interfaces;
 using TodoListApp.WebApp.WebAPIServices.Logging;
-using TodoListApp.WebApp.ViewModels;
-
 namespace TodoListApp.WebApp.WebAPIServices;
 
-public class GenericWebApiService<TViewModel, TService> : IGenericWebApiSerice<TViewModel>
-    where TService : GenericWebApiService<TViewModel, TService>
+public class GenericWebApiService<TModel, TService> : IGenericWebApiSerice<TModel>
+    where TService : GenericWebApiService<TModel, TService>
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S6672:Generic logger injection should match enclosing type", Justification = "Misfire")]
-    public GenericWebApiService(GenericServiceHelpers<TViewModel> helpers, HttpClient httpClient, ILogger<TService> logger)
+    public GenericWebApiService(GenericServiceHelpers<TModel> helpers, HttpClient httpClient, ILogger<TService> logger)
     {
         this.Logger = logger;
         this.HttpClient = httpClient;
@@ -23,9 +21,9 @@ public class GenericWebApiService<TViewModel, TService> : IGenericWebApiSerice<T
 
     protected HttpClient HttpClient { get; }
 
-    protected GenericServiceHelpers<TViewModel> Helpers { get; }
+    protected GenericServiceHelpers<TModel> Helpers { get; }
 
-    public async Task Add(TViewModel webApiModel)
+    public async Task Add(TModel webApiModel)
     {
         var uri = this.Helpers.AddEndpointUriGenerator();
 
@@ -37,7 +35,7 @@ public class GenericWebApiService<TViewModel, TService> : IGenericWebApiSerice<T
 
         if (response.EnsureSuccessStatusCode().StatusCode == HttpStatusCode.OK)
         {
-            this.Logger.ApiAddRequestSuccessful<TViewModel>();
+            this.Logger.ApiAddRequestSuccessful<TModel>();
         }
     }
 
@@ -49,7 +47,7 @@ public class GenericWebApiService<TViewModel, TService> : IGenericWebApiSerice<T
 
         var count = JsonSerializer.Deserialize<int>(await response.Content.ReadAsStringAsync());
 
-        this.Logger.ApiCountRequestSuccessful<TViewModel>();
+        this.Logger.ApiCountRequestSuccessful<TModel>();
         return count;
     }
 
@@ -61,36 +59,36 @@ public class GenericWebApiService<TViewModel, TService> : IGenericWebApiSerice<T
 
         if (response.EnsureSuccessStatusCode().StatusCode == HttpStatusCode.OK)
         {
-            this.Logger.ApiDeleteRequestSuccessful<TViewModel>();
+            this.Logger.ApiDeleteRequestSuccessful<TModel>();
         }
     }
 
-    public async Task<TViewModel?> GetById(int id)
+    public async Task<TModel?> GetById(int id)
     {
         var uri = this.Helpers.GetByIdEndpointUriGenerator(id);
 
         var response = await this.HttpClient.GetAsync(uri);
 
-        var model = JsonSerializer.Deserialize<TViewModel>(await response.Content.ReadAsStringAsync());
+        var model = JsonSerializer.Deserialize<TModel>(await response.Content.ReadAsStringAsync());
 
-        this.Logger.ApiRetieveByIdRequestSuccessful<TViewModel>();
+        this.Logger.ApiRetieveByIdRequestSuccessful<TModel>();
         return model;
     }
 
-    public async Task<IList<TViewModel>> List(int page = 1)
+    public async Task<IList<TModel>> List(int page = 1)
     {
         var uri = this.Helpers.ListEndpointUriGenerator(page);
 
         var response = await this.HttpClient.GetAsync(uri);
 
-        var model = JsonSerializer.Deserialize<List<TViewModel>>(await response.Content.ReadAsStringAsync());
+        var model = JsonSerializer.Deserialize<List<TModel>>(await response.Content.ReadAsStringAsync());
 
-        this.Logger.ApiListRequestSuccessful<TViewModel>();
+        this.Logger.ApiListRequestSuccessful<TModel>();
 
-        return model ?? new List<TViewModel>();
+        return model ?? new List<TModel>();
     }
 
-    public async Task Update(TViewModel webApiModel)
+    public async Task Update(TModel webApiModel)
     {
         var uri = this.Helpers.UpdateEndpointUriGenerator();
 
@@ -102,7 +100,7 @@ public class GenericWebApiService<TViewModel, TService> : IGenericWebApiSerice<T
 
         if (response.EnsureSuccessStatusCode().StatusCode == HttpStatusCode.OK)
         {
-            this.Logger.ApiUpdateRequestSuccessful<TViewModel>();
+            this.Logger.ApiUpdateRequestSuccessful<TModel>();
         }
     }
 }

@@ -1,12 +1,13 @@
 using TodoListApp.WebApp.ViewModels;
 using TodoListApp.WebApp.WebAPIServices.Helpers;
+using TodoListApp.WebApp.WebAPIServices.Models;
 
 namespace TodoListApp.WebApp.WebAPIServices;
 
-public class TodoListWebApiService : GenericWebApiService<TodoListViewModel, TodoListWebApiService>
+public class TodoListWebApiService : GenericWebApiService<TodoList, TodoListWebApiService>
 {
-    public TodoListWebApiService(GenericServiceHelpers<TodoListViewModel> taskHelpers, HttpClient httpClient, ILogger<TodoListWebApiService> logger)
-        : base(taskHelpers, httpClient, logger)
+    public TodoListWebApiService(GenericServiceHelpers<TodoList> helpers, HttpClient httpClient, ILogger<TodoListWebApiService> logger)
+        : base(helpers, httpClient, logger)
     {
     }
 

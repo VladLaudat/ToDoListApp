@@ -1,6 +1,6 @@
 namespace TodoListApp.WebApp.WebAPIServices.Helpers;
 
-public interface IGenericServiceHelpers<TViewModel>
+public interface IGenericServiceHelpers<TModel>
 {
     public Uri UpdateEndpointUriGenerator();
 
