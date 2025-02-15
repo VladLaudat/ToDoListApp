@@ -5,7 +5,7 @@ namespace TodoListApp.WebApp.WebAPIServices;
 
 public class StatusWebApiService : GenericWebApiService<Status, StatusWebApiService>
 {
-    public StatusWebApiService(GenericServiceHelpers<Status> helpers, HttpClient httpClient, ILogger<StatusWebApiService> logger)
+    public StatusWebApiService(IGenericServiceHelpers<Status> helpers, HttpClient httpClient, ILogger<StatusWebApiService> logger)
         : base(helpers, httpClient, logger)
     {
     }

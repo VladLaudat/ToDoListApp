@@ -5,7 +5,7 @@ namespace TodoListApp.WebApp.WebAPIServices;
 
 public class TagWebApiService : GenericWebApiService<Tag, TagWebApiService>
 {
-    public TagWebApiService(GenericServiceHelpers<Tag> helpers, HttpClient httpClient, ILogger<TagWebApiService> logger)
+    public TagWebApiService(IGenericServiceHelpers<Tag> helpers, HttpClient httpClient, ILogger<TagWebApiService> logger)
         : base(helpers, httpClient, logger)
     {
     }

@@ -2,18 +2,20 @@ using Microsoft.AspNetCore.Mvc;
 using TodoListApp.WebApp.Controllers.Helpers;
 using TodoListApp.WebApp.Controllers.Logging;
 using TodoListApp.WebApp.Models.RequestModels.TodoListControllerModels;
-using TodoListApp.WebApp.ViewModels;
+using TodoListApp.WebApp.ViewModels.TodoList;
+using TodoListApp.WebApp.WebAPIServices;
 using TodoListApp.WebApp.WebAPIServices.Interfaces;
+using TodoListApp.WebApp.WebAPIServices.Models;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace TodoListApp.WebApp.Controllers;
 public class TodoListController : Controller
 {
-    private readonly ITodoListWebApiService todoListWebApiService;
+    private readonly IGenericWebApiSerice<TodoList> todoListWebApiService;
     private readonly ILogger<TodoListController> logger;
-    private readonly ITodoListHelpers helpers;
+    private readonly IGenericHelpers<TodoList> helpers;
 
-    public TodoListController(ITodoListWebApiService todoListWebApiService, ILogger<TodoListController> logger, ITodoListHelpers helpers)
+    public TodoListController(IGenericWebApiSerice<TodoList> todoListWebApiService, ILogger<TodoListController> logger, IGenericHelpers<TodoList> helpers)
     {
         this.todoListWebApiService = todoListWebApiService;
         this.logger = logger;
@@ -28,7 +30,7 @@ public class TodoListController : Controller
             return this.BadRequest(this.ModelState);
         }
 
-        TodoListListViewModel viewmodel = new TodoListListViewModel
+        ListViewModel viewmodel = new ListViewModel
         {
             TodoLists = await this.todoListWebApiService.List(model.Page),
             TotalPages = await this.helpers.TotalPages(),
@@ -69,7 +71,7 @@ public class TodoListController : Controller
         return this.RedirectToAction("List");
     }
 
-    public async Task<IActionResult> UpdateToDb(TodoListViewModel todoListWebApiModel)
+    public async Task<IActionResult> UpdateToDb(TodoList todoListWebApiModel)
     {
         if (!this.ModelState.IsValid || todoListWebApiModel == null)
         {
@@ -82,7 +84,7 @@ public class TodoListController : Controller
         return this.RedirectToAction("List");
     }
 
-    public async Task<IActionResult> AddToDb(TodoListViewModel todoListWebApiModel)
+    public async Task<IActionResult> AddToDb(TodoList todoListWebApiModel)
     {
         if (!this.ModelState.IsValid || todoListWebApiModel == null)
         {

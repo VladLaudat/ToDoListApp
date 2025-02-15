@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace TodoListApp.WebApi.Repository.Entities;
 
@@ -12,5 +13,5 @@ public class TodoListEntity : BaseEntity
     [Column("description")]
     public string Description { get; set; } = string.Empty;
 
-    public IList<TaskEntity>? Task { get; }
+    public IList<TaskEntity>? Tasks { get; }
 }

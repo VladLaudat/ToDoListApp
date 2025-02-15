@@ -5,7 +5,7 @@ namespace TodoListApp.WebApp.WebAPIServices;
 
 public class TaskWebApiService : GenericWebApiService<Models.Task, TaskWebApiService>
 {
-    public TaskWebApiService(GenericServiceHelpers<Models.Task> helpers, HttpClient httpClient, ILogger<TaskWebApiService> logger)
+    public TaskWebApiService(IGenericServiceHelpers<Models.Task> helpers, HttpClient httpClient, ILogger<TaskWebApiService> logger)
         : base(helpers, httpClient, logger)
     {
     }

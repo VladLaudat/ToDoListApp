@@ -4,13 +4,15 @@ using System.Text;
 using TodoListApp.WebApp.WebAPIServices.Helpers;
 using TodoListApp.WebApp.WebAPIServices.Interfaces;
 using TodoListApp.WebApp.WebAPIServices.Logging;
+using TodoListApp.WebApp.WebAPIServices.Models;
 namespace TodoListApp.WebApp.WebAPIServices;
 
 public class GenericWebApiService<TModel, TService> : IGenericWebApiSerice<TModel>
+    where TModel : BaseModel
     where TService : GenericWebApiService<TModel, TService>
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S6672:Generic logger injection should match enclosing type", Justification = "Misfire")]
-    public GenericWebApiService(GenericServiceHelpers<TModel> helpers, HttpClient httpClient, ILogger<TService> logger)
+    public GenericWebApiService(IGenericServiceHelpers<TModel> helpers, HttpClient httpClient, ILogger<TService> logger)
     {
         this.Logger = logger;
         this.HttpClient = httpClient;
@@ -21,9 +23,9 @@ public class GenericWebApiService<TModel, TService> : IGenericWebApiSerice<TMode
 
     protected HttpClient HttpClient { get; }
 
-    protected GenericServiceHelpers<TModel> Helpers { get; }
+    protected IGenericServiceHelpers<TModel> Helpers { get; }
 
-    public async Task Add(TModel webApiModel)
+    public async System.Threading.Tasks.Task Add(TModel webApiModel)
     {
         var uri = this.Helpers.AddEndpointUriGenerator();
 
@@ -51,7 +53,7 @@ public class GenericWebApiService<TModel, TService> : IGenericWebApiSerice<TMode
         return count;
     }
 
-    public async Task Delete(int id)
+    public async System.Threading.Tasks.Task Delete(int id)
     {
         var uri = this.Helpers.DeleteEndpointUriGenerator(id);
 
@@ -88,7 +90,7 @@ public class GenericWebApiService<TModel, TService> : IGenericWebApiSerice<TMode
         return model ?? new List<TModel>();
     }
 
-    public async Task Update(TModel webApiModel)
+    public async System.Threading.Tasks.Task Update(TModel webApiModel)
     {
         var uri = this.Helpers.UpdateEndpointUriGenerator();
 

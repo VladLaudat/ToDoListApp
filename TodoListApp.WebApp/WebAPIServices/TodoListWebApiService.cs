@@ -6,7 +6,7 @@ namespace TodoListApp.WebApp.WebAPIServices;
 
 public class TodoListWebApiService : GenericWebApiService<TodoList, TodoListWebApiService>
 {
-    public TodoListWebApiService(GenericServiceHelpers<TodoList> helpers, HttpClient httpClient, ILogger<TodoListWebApiService> logger)
+    public TodoListWebApiService(IGenericServiceHelpers<TodoList> helpers, HttpClient httpClient, ILogger<TodoListWebApiService> logger)
         : base(helpers, httpClient, logger)
     {
     }

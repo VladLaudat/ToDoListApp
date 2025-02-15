@@ -2,17 +2,19 @@ using Microsoft.AspNetCore.Mvc;
 using TodoListApp.WebApp.Controllers.Helpers;
 using TodoListApp.WebApp.Controllers.Logging;
 using TodoListApp.WebApp.Models.RequestModels.TaskControllerModels;
-using TodoListApp.WebApp.ViewModels;
+using TodoListApp.WebApp.ViewModels.Task;
+using TodoListApp.WebApp.WebAPIServices;
 using TodoListApp.WebApp.WebAPIServices.Interfaces;
+using TodoListApp.WebApp.WebAPIServices.Models;
 
 namespace TodoListApp.WebApp.Controllers;
 public class TaskController : Controller
 {
-    private readonly ITaskWebApiService taskWebApiService;
+    private readonly IGenericWebApiSerice<WebAPIServices.Models.Task> taskWebApiService;
     private readonly ILogger<TaskController> logger;
-    private readonly ITaskHelpers helpers;
+    private readonly IGenericHelpers<WebAPIServices.Models.Task> helpers;
 
-    public TaskController(ITaskWebApiService taskWebApiService, ILogger<TaskController> logger, ITaskHelpers helpers)
+    public TaskController(IGenericWebApiSerice<WebAPIServices.Models.Task> taskWebApiService, ILogger<TaskController> logger, IGenericHelpers<WebAPIServices.Models.Task> helpers)
     {
         this.taskWebApiService = taskWebApiService;
         this.logger = logger;
@@ -27,7 +29,7 @@ public class TaskController : Controller
             return this.BadRequest(this.ModelState);
         }
 
-        TaskListViewModel viewModel = new TaskListViewModel()
+        ListViewModel viewModel = new ListViewModel()
         {
             Tasks = await this.taskWebApiService.List(model.Page),
             TotalPages = await this.helpers.TotalPages(),
@@ -68,7 +70,7 @@ public class TaskController : Controller
         return this.RedirectToAction("List");
     }
 
-    public async Task<IActionResult> UpdateToDb(TaskViewModel taskWebApiModel)
+    public async Task<IActionResult> UpdateToDb(WebAPIServices.Models.Task taskWebApiModel)
     {
         if (!this.ModelState.IsValid || taskWebApiModel == null)
         {
@@ -81,7 +83,7 @@ public class TaskController : Controller
         return this.RedirectToAction("List");
     }
 
-    public async Task<IActionResult> AddToDb(TaskViewModel taskWebApiModel)
+    public async Task<IActionResult> AddToDb(WebAPIServices.Models.Task taskWebApiModel)
     {
         if (!this.ModelState.IsValid || taskWebApiModel == null)
         {

@@ -1,6 +1,6 @@
 namespace TodoListApp.WebApp.Controllers.Helpers;
 
-public interface ITaskHelpers
+public interface IGenericHelpers<TModel>
 {
     public Task<int> TotalPages();
 }

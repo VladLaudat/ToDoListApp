@@ -1,7 +1,9 @@
+using TodoListApp.WebApp.Controllers.Helpers;
 using TodoListApp.WebApp.ViewModels;
 using TodoListApp.WebApp.WebAPIServices;
 using TodoListApp.WebApp.WebAPIServices.Helpers;
 using TodoListApp.WebApp.WebAPIServices.Interfaces;
+using TodoListApp.WebApp.WebAPIServices.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,13 +11,22 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
 
-builder.Services.AddScoped<GenericWebApiService<TodoListViewModel, TodoListWebApiService>, TodoListWebApiService>();
-builder.Services.AddScoped<IGenericServiceHelpers<TodoListViewModel>, GenericServiceHelpers<TodoListViewModel>>();
-builder.Services.AddScoped<TodoListApp.WebApp.Controllers.Helpers.ITodoListHelpers, TodoListApp.WebApp.Controllers.Helpers.TodoListHelpers>();
+builder.Services.AddScoped<IGenericServiceHelpers<TodoList>, GenericServiceHelpers<TodoList>>();
+builder.Services.AddScoped<IGenericWebApiSerice<TodoList>, TodoListWebApiService>();
+builder.Services.AddScoped<IGenericHelpers<TodoList>, GenericHelpers<TodoList>>();
 
-builder.Services.AddScoped<GenericWebApiService<TaskViewModel, TaskWebApiService>, TaskWebApiService>();
-builder.Services.AddScoped<IGenericServiceHelpers<TaskViewModel>, GenericServiceHelpers<TaskViewModel>>();
-builder.Services.AddScoped<TodoListApp.WebApp.WebAPIServices.Helpers.ITaskHelpers, TodoListApp.WebApp.WebAPIServices.Helpers.TaskHelpers>();
+builder.Services.AddScoped<IGenericServiceHelpers<TodoListApp.WebApp.WebAPIServices.Models.Task>, GenericServiceHelpers<TodoListApp.WebApp.WebAPIServices.Models.Task>>();
+builder.Services.AddScoped<IGenericWebApiSerice<TodoListApp.WebApp.WebAPIServices.Models.Task>, TaskWebApiService>();
+builder.Services.AddScoped<IGenericHelpers<TodoListApp.WebApp.WebAPIServices.Models.Task>, GenericHelpers<TodoListApp.WebApp.WebAPIServices.Models.Task>>();
+
+/*builder.Services.AddScoped<IGenericWebApiSerice<Tag>, TagWebApiService>();
+builder.Services.AddScoped<IGenericServiceHelpers<Tag>, GenericServiceHelpers<Tag>>();
+
+builder.Services.AddScoped<IGenericWebApiSerice<Status>, StatusWebApiService>();
+builder.Services.AddScoped<IGenericServiceHelpers<Status>, GenericServiceHelpers<Status>>();
+
+builder.Services.AddScoped<IGenericWebApiSerice<Comment>, CommentWebApiService>();
+builder.Services.AddScoped<IGenericServiceHelpers<Comment>, GenericServiceHelpers<Comment>>();*/
 
 var app = builder.Build();
 

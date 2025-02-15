@@ -5,7 +5,7 @@ namespace TodoListApp.WebApp.WebAPIServices;
 
 public class CommentWebApiService : GenericWebApiService<Comment, CommentWebApiService>
 {
-    public CommentWebApiService(GenericServiceHelpers<Comment> helpers, HttpClient httpClient, ILogger<CommentWebApiService> logger)
+    public CommentWebApiService(IGenericServiceHelpers<Comment> helpers, HttpClient httpClient, ILogger<CommentWebApiService> logger)
         : base(helpers, httpClient, logger)
     {
     }

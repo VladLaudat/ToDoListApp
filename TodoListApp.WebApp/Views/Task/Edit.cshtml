@@ -1,7 +1,14 @@
-@model TodoListApp.WebApp.ViewModels.TaskViewModel
+@model TodoListApp.WebApp.WebAPIServices.Models.Task
 
 <form asp-controller="Task" asp-action="UpdateToDb">
     <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="CreatedDate" />
+    <input type="hidden" asp-for="DueDate" />
+    <input type="hidden" asp-for="StatusId" />
+    <input type="hidden" asp-for="TodoListId" />
+    <input type="hidden" asp-for="Status" />
+    <input type="hidden" asp-for="TodoList" />
+    <input type="hidden" asp-for="Tags" />
     <div class="form-group">
         <label asp-for="Title"></label>
         <input asp-for="Title" class="form-control" />
