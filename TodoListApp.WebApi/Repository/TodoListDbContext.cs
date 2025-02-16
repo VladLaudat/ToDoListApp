@@ -3,9 +3,14 @@ using TodoListApp.WebApi.Repository.Entities;
 
 namespace TodoListApp.WebApi.Repository;
 
+[System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S2326:Unused type parameters should be removed", Justification = "Needed for DI")]
+[System.Diagnostics.CodeAnalysis.SuppressMessage("Maintainability", "CA1515:Consider making public types internal", Justification = "I prefer public")]
+[System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0079:Remove unnecessary suppression", Justification = "I need the suppression")]
 public class TodoListDbContext : DbContext
 {
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
     public TodoListDbContext(DbContextOptions<TodoListDbContext> options)
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
         : base(options)
     {
     }
@@ -39,8 +44,7 @@ public class TodoListDbContext : DbContext
             new TodoListEntity { Id = 9, Description = "TodoListDescription9", Title = "TodoList9" },
             new TodoListEntity { Id = 10, Description = "TodoListDescription10", Title = "TodoList10" },
             new TodoListEntity { Id = 11, Description = "TodoListDescription11", Title = "TodoList11" },
-            new TodoListEntity { Id = 12, Description = "TodoListDescription12", Title = "TodoList12" }
-        );
+            new TodoListEntity { Id = 12, Description = "TodoListDescription12", Title = "TodoList12" });
 
         _ = modelBuilder.Entity<TaskEntity>().HasData(
             new TaskEntity { Id = 1, Description = "TaskDescription1", Title = "Task1", CreatedDate = DateTime.Now, DueDate = DateTime.Now.AddDays(-1), StatusId = 1 },

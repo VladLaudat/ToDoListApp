@@ -1,8 +1,10 @@
-using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace TodoListApp.WebApp.WebAPIServices.Models;
-
+[System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S2326:Unused type parameters should be removed", Justification = "Needed for DI")]
+[System.Diagnostics.CodeAnalysis.SuppressMessage("Maintainability", "CA1515:Consider making public types internal", Justification = "I prefer public")]
+[System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0079:Remove unnecessary suppression", Justification = "I need the suppression")]
 public class Task : BaseModel
 {
     [JsonPropertyName("title")]
@@ -15,6 +17,8 @@ public class Task : BaseModel
     public DateTime CreatedDate { get; set; }
 
     [JsonPropertyName("dueDate")]
+    [DataType(DataType.Date)]
+    [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
     public DateTime DueDate { get; set; }
 
     [JsonPropertyName("statusId")]

@@ -1,12 +1,8 @@
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.Data.Common;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using TodoListApp.WebApi.Controllers.Interfaces;
-
 namespace TodoListApp.WebApi.Controllers.Logging;
 
+[System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S2326:Unused type parameters should be removed", Justification = "Needed for DI")]
+[System.Diagnostics.CodeAnalysis.SuppressMessage("Maintainability", "CA1515:Consider making public types internal", Justification = "I prefer public")]
+[System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0079:Remove unnecessary suppression", Justification = "I need the suppression")]
 public static class CommonLoggerExtensions
 {
     private static readonly Action<ILogger, string, string, Exception?> UnexpectedException = LoggerMessage.Define<string, string>(

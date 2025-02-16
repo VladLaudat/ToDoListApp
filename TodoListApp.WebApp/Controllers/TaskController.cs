@@ -2,12 +2,13 @@ using Microsoft.AspNetCore.Mvc;
 using TodoListApp.WebApp.Controllers.Helpers;
 using TodoListApp.WebApp.Controllers.Logging;
 using TodoListApp.WebApp.Models.RequestModels.TaskControllerModels;
-using TodoListApp.WebApp.ViewModels.Task;
-using TodoListApp.WebApp.WebAPIServices;
+using TodoListApp.WebApp.ViewModels.TaskViewModel;
 using TodoListApp.WebApp.WebAPIServices.Interfaces;
-using TodoListApp.WebApp.WebAPIServices.Models;
 
 namespace TodoListApp.WebApp.Controllers;
+[System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S2326:Unused type parameters should be removed", Justification = "Needed for DI")]
+[System.Diagnostics.CodeAnalysis.SuppressMessage("Maintainability", "CA1515:Consider making public types internal", Justification = "I prefer public")]
+[System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0079:Remove unnecessary suppression", Justification = "I need the suppression")]
 public class TaskController : Controller
 {
     private readonly IGenericWebApiSerice<WebAPIServices.Models.Task> taskWebApiService;
@@ -40,7 +41,7 @@ public class TaskController : Controller
         return this.View(viewModel);
     }
 
-    public async Task<IActionResult> Add()
+    public IActionResult Add()
     {
         return this.View();
     }
@@ -107,5 +108,4 @@ public class TaskController : Controller
         var model = await this.taskWebApiService.GetById(id);
         return this.View(model);
     }
-
 }

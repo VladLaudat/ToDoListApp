@@ -1,14 +1,13 @@
 using Microsoft.EntityFrameworkCore;
+using TodoListApp.WebApi.Filters;
 using TodoListApp.WebApi.Repository;
 using TodoListApp.WebApi.Repository.Entities;
 using TodoListApp.WebApi.Services;
 using TodoListApp.WebApi.Services.Interfaces;
-using TodoListApp.WebApi.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers(cfg =>
 {
     _ = cfg.Filters.Add<Exception500Filter>();
@@ -26,11 +25,10 @@ builder.Services.AddScoped<IBaseDatabaseService<StatusEntity>, StatusDatabaseSer
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+await app.RunAsync();

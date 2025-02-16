@@ -1,12 +1,16 @@
 using System.Net;
-using System.Text.Json;
 using System.Text;
+using System.Text.Json;
 using TodoListApp.WebApp.WebAPIServices.Helpers;
 using TodoListApp.WebApp.WebAPIServices.Interfaces;
 using TodoListApp.WebApp.WebAPIServices.Logging;
 using TodoListApp.WebApp.WebAPIServices.Models;
+
 namespace TodoListApp.WebApp.WebAPIServices;
 
+[System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S2326:Unused type parameters should be removed", Justification = "Needed for DI")]
+[System.Diagnostics.CodeAnalysis.SuppressMessage("Maintainability", "CA1515:Consider making public types internal", Justification = "I prefer public")]
+[System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0079:Remove unnecessary suppression", Justification = "I need the suppression")]
 public class GenericWebApiService<TModel, TService> : IGenericWebApiSerice<TModel>
     where TModel : BaseModel
     where TService : GenericWebApiService<TModel, TService>

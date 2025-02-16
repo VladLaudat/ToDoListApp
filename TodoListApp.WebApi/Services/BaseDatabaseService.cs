@@ -5,6 +5,9 @@ using TodoListApp.WebApi.Services.Logging;
 
 namespace TodoListApp.WebApi.Services;
 
+[System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S2326:Unused type parameters should be removed", Justification = "Needed for DI")]
+[System.Diagnostics.CodeAnalysis.SuppressMessage("Maintainability", "CA1515:Consider making public types internal", Justification = "I prefer public")]
+[System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0079:Remove unnecessary suppression", Justification = "I need the suppression")]
 public class BaseDatabaseService<TEntity, TService> : IBaseDatabaseService<TEntity>
     where TEntity : BaseEntity
     where TService : BaseDatabaseService<TEntity, TService>
@@ -52,7 +55,6 @@ public class BaseDatabaseService<TEntity, TService> : IBaseDatabaseService<TEnti
             Skip((page - 1) * pageSize)
             .Take(pageSize).ToList();
 
-
         this.Logger.DBRetrievedEntities<TEntity>();
 
         return entities;
@@ -61,7 +63,6 @@ public class BaseDatabaseService<TEntity, TService> : IBaseDatabaseService<TEnti
     public virtual TEntity ReadById(int id)
     {
         var entity = this.DbContext.Set<TEntity>().FirstOrDefault(x => x.Id == id);
-
 
         this.Logger.DBRetrievedEntitiesById<TEntity>();
 
