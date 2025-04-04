@@ -1,0 +1,9 @@
+{
+  "sonarlint": {
+    "rules": {
+      "exclusions": [
+        "Migrations"
+      ]
+    }
+  }
+}
